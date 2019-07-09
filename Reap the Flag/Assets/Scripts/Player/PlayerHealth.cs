@@ -18,7 +18,9 @@ namespace PlayerComponent
         Animator anim;                                              // Reference to the Animator component.
         AudioSource playerAudio;                                    // Reference to the AudioSource component.
         PlayerController playerMovement;                              // Reference to the player's movement.
-        PlayerShooting playerShooting;                              // Reference to the PlayerShooting script.
+        PlayerShooting playerShooting;
+        public ParticleSystem particleHits;
+
         bool isDead;                                                // Whether the player is dead.
         bool damaged;                                               // True when the player gets damaged.
         Color defaultColor = new Color(1f, 0f, 0f, 0f);
@@ -30,11 +32,15 @@ namespace PlayerComponent
             playerAudio = GetComponent <AudioSource> ();
             playerMovement = GetComponent <PlayerController> ();
             playerShooting = GetComponentInChildren <PlayerShooting> ();
-
             // Set the initial health of the player.
             currentHealth = startingHealth;
         }
 
+        private void Start()
+        {
+            healthSlider.maxValue = startingHealth;
+            healthSlider.value = currentHealth;
+        }
 
         void Update ()
         {
@@ -62,17 +68,19 @@ namespace PlayerComponent
             // Reduce the current health by the damage amount.
             currentHealth -= amount;
 
-            // Set the health bar's value to the current health.
-/*            healthSlider.value = currentHealth;
-*/
+            
+            healthSlider.value = currentHealth;
             // Play the hurt sound effect.
-            playerAudio.Play ();
+            playerAudio.Play();
+            if (particleHits == null)
+            Debug.Log("Player hits!");
+            particleHits.Play();
 
             // If the player has lost all it's health and the death flag hasn't been set yet...
             if(currentHealth <= 0 && !isDead)
             {
                 // ... it should die.
-                Death ();
+                Death();
             }
         }
 

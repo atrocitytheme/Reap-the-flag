@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
-
 namespace PlayerComponent
 {
+    [RequireComponent(typeof(InitializerTimer))]
     public class PlayerController : MonoBehaviour
     {
         public float speed = 6f;            // The speed that the player will move at.
@@ -10,12 +10,15 @@ namespace PlayerComponent
         Vector3 movement;                   // The vector to store the direction of the player's movement.
         Animator anim;                      // Reference to the animator component.
         Rigidbody playerRigidbody;          // Reference to the player's rigidbody.
-        float h = 0;
-        float v = 0;
+        InitializerTimer timer;
+
+        float h = 0; // the rotation direction of mouse x
+        float v = 0; // the rotation direction of mouse y
         void Awake ()
         {
             anim = GetComponent <Animator> ();
             playerRigidbody = GetComponent <Rigidbody> ();
+            timer = GetComponent<InitializerTimer>();
         }
 
 
@@ -29,6 +32,7 @@ namespace PlayerComponent
             Move (h, v);
 
             // Turn the player to face the mouse cursor.
+            if (timer.IsValid)
             Turning ();
 
             // Animate the player.

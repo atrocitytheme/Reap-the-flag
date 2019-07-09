@@ -10,7 +10,6 @@ namespace PlayerComponent
         public int damagePerShot = 20;                  // The damage inflicted by each bullet.
         public float timeBetweenBullets = 0.15f;        // The time between each shot.
         public float range = 10f;                      // The distance the gun can fire.
-        public Image shotImage;
 
         float timer;                                    // A timer to determine when to fire.
         Ray shootRay = new Ray();                       // A ray from the gun end forwards.
@@ -54,7 +53,6 @@ namespace PlayerComponent
             }
 
             // restore the shot color
-            shotImage.color = Color.Lerp(shotImage.color, defaultColor, Time.deltaTime * 2);
         }
 
 
@@ -101,7 +99,6 @@ namespace PlayerComponent
                     if (!target.IsDead())
                     {
                         target.TakeDamage(damagePerShot, shootHit.point);
-                        shotImage.color = shotColor;
                     }
                 }
                 gunLine.SetPosition (1, shootHit.point);
