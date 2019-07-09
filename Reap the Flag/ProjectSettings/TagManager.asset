@@ -13,11 +13,11 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Floor
+  - Shootable
+  - LightMask
+  - Invisible
+  - PostProcessing
   - 
   - 
   - 
