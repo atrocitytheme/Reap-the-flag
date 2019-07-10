@@ -1,2 +1,2 @@
 # Reap-the-flag
-A multiple player game powered by unity
+A multiple player online game powered by unity
