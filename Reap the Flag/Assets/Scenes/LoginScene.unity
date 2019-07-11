@@ -5064,7 +5064,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0.10040315, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 0, y: 9.1835e-41, z: 1.478552e-38, w: 4.863608e-37}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -5204,7 +5204,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1217088215}
   - component: {fileID: 1217088214}
-  - component: {fileID: 1217088216}
   m_Layer: 0
   m_Name: NetworkSystemFacade
   m_TagString: Untagged
@@ -5225,7 +5224,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panel: {fileID: 1179231338}
-  url: 
+  url: http://localhost:8080/login
 --- !u!4 &1217088215
 Transform:
   m_ObjectHideFlags: 0
@@ -5240,19 +5239,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1217088216
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1217088213}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af54448b820f70444a7af27a1bc26a56, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefab: {fileID: 8808382899468728322, guid: a58f28380d9bff94abd9f77ddeb98434, type: 3}
 --- !u!1 &1672829905
 GameObject:
   m_ObjectHideFlags: 0
@@ -5378,6 +5364,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: LoginPanel
       objectReference: {fileID: 0}
+    - target: {fileID: 1669104039885177564, guid: c38be583055def845b3bc92023d83859,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1669104039885177567, guid: c38be583055def845b3bc92023d83859,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5483,11 +5474,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1669104039885177564, guid: c38be583055def845b3bc92023d83859,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1669104039658969110, guid: c38be583055def845b3bc92023d83859,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -5512,7 +5498,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1217088216}
+      objectReference: {fileID: 0}
     - target: {fileID: 1669104039658969110, guid: c38be583055def845b3bc92023d83859,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -5522,6 +5508,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1669104038721890343, guid: c38be583055def845b3bc92023d83859,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3.5275245
+      objectReference: {fileID: 0}
+    - target: {fileID: 1669104038721890343, guid: c38be583055def845b3bc92023d83859,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.7469234
+      objectReference: {fileID: 0}
+    - target: {fileID: 1669104038077379421, guid: c38be583055def845b3bc92023d83859,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.9282402
+      objectReference: {fileID: 0}
+    - target: {fileID: 1669104038582879897, guid: c38be583055def845b3bc92023d83859,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.1897
+      objectReference: {fileID: 0}
+    - target: {fileID: 1669104038202352932, guid: c38be583055def845b3bc92023d83859,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.3144
+      objectReference: {fileID: 0}
+    - target: {fileID: 1669104038582879878, guid: c38be583055def845b3bc92023d83859,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c38be583055def845b3bc92023d83859, type: 3}

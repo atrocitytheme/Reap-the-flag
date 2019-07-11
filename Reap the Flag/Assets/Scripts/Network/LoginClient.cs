@@ -3,21 +3,28 @@ using System.Threading.Tasks;
 using UnityEngine;
 using System;
 using System.Collections.Generic;
+using System.Net.Http.Headers;
+using UnityEngine.SceneManagement;
 
 public class LoginClient : MonoBehaviour
 {
     public LoginPanelOperator panel;
     public string url;
     HttpClient client = new HttpClient();
+
+    private void Awake()
+    {
+        client.Timeout = TimeSpan.FromSeconds(1);
+        client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("text/plain"));
+    }
     public void ConnecteToServer()
     {
-        var requestTask = Request();
-        requestTask.Wait();
-        bool isSuccess = requestTask.Result;
+        var isSuccess = Task.Run(() => Request()).Result;
 
         if (isSuccess)
         {
-            Debug.Log("Log in succeed!");
+            SceneManager.LoadScene("GameScene_1");
+            return;
         }
 
         panel.DisplayInfo(isSuccess);
@@ -25,9 +32,14 @@ public class LoginClient : MonoBehaviour
     }
 
     private async Task<bool> Request() {
+
         try
         {
-            HttpResponseMessage msg = await client.GetAsync(url);
+            var content = new FormUrlEncodedContent(new KeyValuePair<string, string>[]{
+                new KeyValuePair<string, string>("as", "ads")
+            });
+            var msg = await client.PostAsync(url, content);
+            Debug.Log("failed!");
             msg.EnsureSuccessStatusCode();
         }
         catch (HttpRequestException)
@@ -35,7 +47,13 @@ public class LoginClient : MonoBehaviour
             return false;
         }
 
-        catch (InvalidOperationException) {
+        catch (InvalidOperationException)
+        {
+            return false;
+        }
+
+        catch (TaskCanceledException)
+        {
             return false;
         }
 
