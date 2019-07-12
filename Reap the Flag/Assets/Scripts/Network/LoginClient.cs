@@ -39,7 +39,6 @@ public class LoginClient : MonoBehaviour
                 new KeyValuePair<string, string>("as", "ads")
             });
             var msg = await client.PostAsync(url, content);
-            Debug.Log("failed!");
             msg.EnsureSuccessStatusCode();
         }
         catch (HttpRequestException)
