@@ -284,7 +284,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0.5
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -5379,7 +5379,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8808382899468728323}
   m_Layer: 0
-  m_Name: Playerkit 1
+  m_Name: Playerkit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5606,6 +5606,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.x
       value: 75
       objectReference: {fileID: 0}
+    - target: {fileID: 131885364090158040, guid: 52027e57332a9974ba3ae8e4ff318b8f,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 116
+      objectReference: {fileID: 0}
+    - target: {fileID: 131885364095310010, guid: 52027e57332a9974ba3ae8e4ff318b8f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 131885364084551004, guid: 52027e57332a9974ba3ae8e4ff318b8f,
         type: 3}
       propertyPath: healthSlider
@@ -5621,20 +5631,20 @@ PrefabInstance:
       propertyPath: particleHits
       value: 
       objectReference: {fileID: 3072631287726497730}
-    - target: {fileID: 131885364095310010, guid: 52027e57332a9974ba3ae8e4ff318b8f,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 131885364090158040, guid: 52027e57332a9974ba3ae8e4ff318b8f,
-        type: 3}
-      propertyPath: m_Constraints
-      value: 116
-      objectReference: {fileID: 0}
     - target: {fileID: 131885364084551000, guid: 52027e57332a9974ba3ae8e4ff318b8f,
         type: 3}
       propertyPath: shotImage
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 131885364084551000, guid: 52027e57332a9974ba3ae8e4ff318b8f,
+        type: 3}
+      propertyPath: range
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 131885364084551000, guid: 52027e57332a9974ba3ae8e4ff318b8f,
+        type: 3}
+      propertyPath: damagePerShot
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 52027e57332a9974ba3ae8e4ff318b8f, type: 3}

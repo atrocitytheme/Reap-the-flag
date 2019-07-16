@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class PlayerSpawnManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+
+    public GameObject player;
+    private void Start()
     {
-        
+        SpawnPlayer();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
-        
+    }
+    public void SpawnPlayer() {
+        GameObject obj = Instantiate(player, Vector3.zero, Quaternion.identity);
     }
 }
