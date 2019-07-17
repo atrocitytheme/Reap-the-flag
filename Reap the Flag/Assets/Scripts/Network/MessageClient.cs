@@ -9,7 +9,7 @@ public class MessageClient : MonoBehaviour
         EventBasedNetListener listener = new EventBasedNetListener();
         NetManager client = new NetManager(listener);
         client.Start();
-        TestModel model = new TestModel { IP="1,2,3,4,5", CommandType=0};
+        TestModel model = new TestModel { Ip="1,2,3,4,5", CommandType=1};
         client.Connect("10.7.8.185", 9956, JsonConvert.SerializeObject(model));
         listener.NetworkReceiveEvent += (fromPeer, dataReader, deliveryMethod) =>
         {

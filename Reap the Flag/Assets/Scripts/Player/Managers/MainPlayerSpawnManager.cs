@@ -2,17 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MainPlayerSpawnManager : MonoBehaviour
+public class MainPlayerSpawnManager : PlayerSpawnManager
 {
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        
     }
 
-    // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
-        
+    }
+    public void SpawnPlayer() {
+        GameObject obj = Instantiate(player, Vector3.zero, Quaternion.identity);
     }
 }

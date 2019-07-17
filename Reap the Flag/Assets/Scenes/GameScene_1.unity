@@ -400,8 +400,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1648072682}
-  - component: {fileID: 1648072681}
   - component: {fileID: 1648072680}
+  - component: {fileID: 1648072681}
   m_Layer: 0
   m_Name: GameManagerFacade
   m_TagString: Untagged
@@ -431,9 +431,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1648072679}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76e775edae746bd49a5afc18cc44baf0, type: 3}
+  m_Script: {fileID: 11500000, guid: 4a4a7e2d648a5ba409c1372317c18810, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 5127656183964282932, guid: bcb9a953832b14c4884d06804ca88757, type: 3}
 --- !u!4 &1648072682
 Transform:
   m_ObjectHideFlags: 0

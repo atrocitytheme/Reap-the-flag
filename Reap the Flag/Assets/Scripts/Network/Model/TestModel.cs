@@ -7,7 +7,7 @@ public class TestModel
     private string ip;
     private int commandType;
 
-    public string IP {
+    public string Ip {
         get {
             return ip;
         }
