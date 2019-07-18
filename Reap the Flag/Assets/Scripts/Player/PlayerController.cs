@@ -32,8 +32,8 @@ namespace PlayerComponent
             Move (h, v);
 
             // Turn the player to face the mouse cursor.
-            if (timer.IsValid)
-            Turning ();
+/*            if (timer.IsValid)
+*/            Turning ();
 
             // Animate the player.
             Animating (h, v);

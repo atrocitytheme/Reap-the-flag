@@ -52,7 +52,7 @@ namespace PlayerComponent
             }
             else
             {
-                damageImage.color = Color.Lerp(damageImage.color, defaultColor, Time.deltaTime * recoverSpeed);
+                /*damageImage.color = Color.Lerp(damageImage.color, defaultColor, Time.deltaTime * recoverSpeed);*/
             }
 
             // Reset the damaged flag.

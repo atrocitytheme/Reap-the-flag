@@ -6,10 +6,7 @@ public class MainPlayerSpawnManager : PlayerSpawnManager
 {
     private void Start()
     {
-    }
-
-    private void FixedUpdate()
-    {
+        SpawnPlayer();
     }
     public void SpawnPlayer() {
         GameObject obj = Instantiate(player, Vector3.zero, Quaternion.identity);
