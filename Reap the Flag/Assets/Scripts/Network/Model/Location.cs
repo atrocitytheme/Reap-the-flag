@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Location : MonoBehaviour
 {
-    // Start is called before the first frame update
-    
+    WorldPoint location = new WorldPoint();
+
+   
 }

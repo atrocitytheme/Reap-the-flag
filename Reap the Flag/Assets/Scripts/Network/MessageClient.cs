@@ -10,8 +10,9 @@ public class MessageClient : MonoBehaviour
 {
     TestModel model = new TestModel {CommandType = 1 };
     UdpClient udpClient;
+    TcpClient tcpClient;
     private static IPEndPoint remoteEP = new IPEndPoint(IPAddress.Parse("10.7.8.185"), 9956);
-    private void Start()
+    private void Awake()
     {
         string message = JsonConvert.SerializeObject(model);
         udpClient = new UdpClient();
