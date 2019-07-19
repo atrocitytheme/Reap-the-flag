@@ -18,7 +18,6 @@ public class InitializerTimer : MonoBehaviour
     {
         if (timer > 0) {
             timer -= Time.deltaTime * 2;
-            Debug.Log(timer);
         }
     }
 }

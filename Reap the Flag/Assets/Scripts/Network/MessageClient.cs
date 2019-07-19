@@ -3,37 +3,33 @@ using UnityEngine;
 using Newtonsoft.Json;
 using System.Net;
 using System.Net.Sockets;
+using System;
+using System.Text;
 
 public class MessageClient : MonoBehaviour
 {
+    TestModel model = new TestModel {CommandType = 1 };
+    UdpClient udpClient;
+    private static IPEndPoint remoteEP = new IPEndPoint(IPAddress.Parse("10.7.8.185"), 9956);
     private void Start()
     {
-        Debug.Log("start!");
-        EventBasedNetListener listener = new EventBasedNetListener();
-        NetManager client = new NetManager(listener);
-        client.Start();
-        var host = Dns.GetHostEntry(Dns.GetHostName());
-        string ip = "";
-
-        foreach (IPAddress curIp in host.AddressList) {
-            if (curIp.AddressFamily == AddressFamily.InterNetwork) {
-                ip = curIp.ToString();
-                break;
-            }
-        }
-
-        TestModel model = new TestModel { Ip=ip, CommandType=1};
-        Debug.Log("host: " + System.Net.Dns.GetHostName());
-        client.Connect("10.7.8.185", 9956, JsonConvert.SerializeObject(model));
-        listener.NetworkReceiveEvent += (fromPeer, dataReader, deliveryMethod) =>
-        {
-            Debug.Log("we got: {0} " + dataReader.GetString(100));
-        };
-
-        Debug.Log(100 >> 8);
+        string message = JsonConvert.SerializeObject(model);
+        udpClient = new UdpClient();
+        Byte[] data = Encoding.UTF8.GetBytes(message);
+        GetComponent<NetworkReceiver>().registerClient(udpClient);
     }
+
     private void FixedUpdate()
     {
-        
+        askForUpdate();
+    }
+
+    private void askForUpdate() {
+        sendData(JsonConvert.SerializeObject(model), udpClient);
+    }
+
+    private void sendData(string dataSent, UdpClient cli) {
+        Byte[] data = Encoding.UTF8.GetBytes(dataSent);
+        cli.Send(data, data.Length, remoteEP);
     }
 }

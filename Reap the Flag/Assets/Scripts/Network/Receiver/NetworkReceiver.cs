@@ -1,18 +1,28 @@
-﻿using System.Collections;
+﻿using LiteNetLib;
+using LiteNetLib.Utils;
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Net;
+using System.Net.Sockets;
 using UnityEngine;
-
+/// <summary>
+/// register the listening event for the client
+/// </summary>
 public class NetworkReceiver : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    public void registerClient(UdpClient client) {
+        client.BeginReceive(new AsyncCallback(recv(client)), null);    
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    private Action<IAsyncResult> recv(UdpClient client) {
+
+        return (IAsyncResult res) => {
+            Debug.Log("received!");
+            // RECEIVE FROM THE REOMOTE
+            IPEndPoint remotePoint = new IPEndPoint(IPAddress.Any, 9956);
+            Byte[] received = client.EndReceive(res, ref remotePoint);
+            registerClient(client);
+        };
     }
 }

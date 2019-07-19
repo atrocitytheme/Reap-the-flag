@@ -129,6 +129,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 96128189}
+  - component: {fileID: 96128190}
   m_Layer: 0
   m_Name: Network
   m_TagString: Untagged
@@ -150,6 +151,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &96128190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 96128188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e20adf2073146c42ad1fb0c398debd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &451820983
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -255,6 +268,7 @@ GameObject:
   - component: {fileID: 624455187}
   - component: {fileID: 624455188}
   - component: {fileID: 624455189}
+  - component: {fileID: 624455190}
   m_Layer: 0
   m_Name: NetworkTesting
   m_TagString: Untagged
@@ -298,6 +312,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 674803c7343b63f409829a8673887337, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &624455190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 624455186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e20adf2073146c42ad1fb0c398debd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1128451112
@@ -429,7 +455,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1648072679}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4a4a7e2d648a5ba409c1372317c18810, type: 3}
   m_Name: 
