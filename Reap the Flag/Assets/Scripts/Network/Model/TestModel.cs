@@ -1,15 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class TestModel
 {
     private string ip = System.Net.Dns.GetHostName();
     private int commandType;
     private int roomId = 1;
     private int port = 5000;
-    private WorldLocation location;
+    private string id;
 
+    private WorldLocation location;
+    private WorldRotation rotation;
     public string Ip {
         get {
             return ip;
@@ -57,6 +58,26 @@ public class TestModel
 
         set {
             location = value;
+        }
+    }
+
+    public WorldRotation Rotation {
+        get {
+            return rotation;
+        }
+
+        set {
+            rotation = value;
+        }
+    }
+
+    public string Id {
+        get {
+            return id;
+        }
+
+        set {
+            id = value;
         }
     }
 }

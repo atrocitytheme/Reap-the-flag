@@ -2,9 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WorldLocation : MonoBehaviour
+public class WorldLocation
 {
-    WorldPoint location = new WorldPoint();
+    WorldPoint location;
+    public WorldPoint Location {
+        get {
+            return location;
+        }
 
-   
+        set {
+            location = value;
+        }
+    }
+    
 }

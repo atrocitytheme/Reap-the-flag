@@ -2,17 +2,44 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WorldPoint : MonoBehaviour
+public class WorldPoint
 {
     // Start is called before the first frame update
-    void Start()
-    {
-        
+    double x, y, z;
+
+    public double X {
+        get {
+            return x;
+        }
+
+        set {
+            x = value;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public double Y
     {
-        
+        get
+        {
+            return y;
+        }
+
+        set
+        {
+            y = value;
+        }
+    }
+
+    public double Z
+    {
+        get
+        {
+            return z;
+        }
+
+        set
+        {
+            z = value;
+        }
     }
 }

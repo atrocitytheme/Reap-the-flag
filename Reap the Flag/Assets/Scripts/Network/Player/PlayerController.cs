@@ -32,8 +32,10 @@ namespace PlayerComponent
             Move (h, v);
 
             // Turn the player to face the mouse cursor.
-/*            if (timer.IsValid)
-*/            Turning ();
+            /*            if (timer.IsValid)
+            */
+
+            Turning ();
 
             // Animate the player.
             Animating (h, v);
@@ -60,11 +62,16 @@ namespace PlayerComponent
 
         void Turning ()
         {
+           
             h += Input.GetAxis("Mouse X");
             v += Input.GetAxis("Mouse Y");
             transform.eulerAngles = (new Vector3(-v, h, 0) * rotateSmooth);
+            
         }
 
+        public void Turning(float h, float v) {
+            transform.eulerAngles = (new Vector3(-v, h, 0) * rotateSmooth);
+        }
 
         void Animating (float h, float v)
         {
