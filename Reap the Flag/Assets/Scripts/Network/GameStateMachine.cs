@@ -2,15 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameStarter : MonoBehaviour
+public class GameStateMachine : MonoBehaviour
 {
     public MessageClient messageClient;
     private StateType state = StateType.NON_INITIALIZED;
+
+    public StateType State {
+        get {
+            return state;
+        }
+    }
     private void Start()
     {
         if (messageClient)
         {
-            StartGame();
+            /*StartGame();*/
         }
 
         else {
@@ -23,7 +29,7 @@ public class GameStarter : MonoBehaviour
     private void FixedUpdate()
     {
         if (state == StateType.NON_INITIALIZED) {
-            
+            messageClient.AskForUpdate(new TestModel { CommandType = 0});
         }
 
         if (state == StateType.INITIALIZED) {

@@ -1,7 +1,4 @@
-﻿using LiteNetLib;
-using LiteNetLib.Utils;
-using System;
-using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
@@ -11,8 +8,7 @@ using UnityEngine;
 /// register the listening event for the client
 /// </summary>
 [RequireComponent(typeof(OrderProcessor))]
-public class NetworkReceiver : MonoBehaviour
-{
+public class NetworkReceiver : MonoBehaviour { 
     private static readonly Queue<Action> tasks = new Queue<Action>();
     private OrderProcessor processor;
 
@@ -51,7 +47,7 @@ public class NetworkReceiver : MonoBehaviour
             string order = Encoding.UTF8.GetString(received);
             QueueMainThreadWork(() => {
 /*                Debug.Log("got: " + Encoding.UTF8.GetString(received));
-*/                processor.process(Encoding.UTF8.GetString(received));
+*/                processor.Process(Encoding.UTF8.GetString(received));
             });
         };
     }

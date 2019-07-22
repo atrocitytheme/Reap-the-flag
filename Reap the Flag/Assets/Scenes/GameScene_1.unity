@@ -241,12 +241,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 624455186}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 11.160362, y: 0.79045105, z: 0.98091125}
+  m_LocalPosition: {x: 53.985798, y: 233.21378, z: -227.57649}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 2063132546}
   - {fileID: 1648072682}
-  m_Father: {fileID: 2063132546}
-  m_RootOrder: 0
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &624455189
 MonoBehaviour:
@@ -285,6 +286,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   facade: {fileID: 1648072679}
+  starter: {fileID: 2063132547}
 --- !u!1 &1128451112
 GameObject:
   m_ObjectHideFlags: 0
@@ -433,7 +435,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 624455187}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1648072683
 MonoBehaviour:
@@ -458,7 +460,7 @@ GameObject:
   - component: {fileID: 2063132546}
   - component: {fileID: 2063132547}
   m_Layer: 0
-  m_Name: GameStarter
+  m_Name: Communicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -472,12 +474,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2063132545}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 42.825436, y: 232.42332, z: -228.5574}
+  m_LocalPosition: {x: -11.160362, y: -0.79045105, z: -0.98091125}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 624455187}
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_Children: []
+  m_Father: {fileID: 624455187}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2063132547
 MonoBehaviour:

@@ -5,9 +5,9 @@ using UnityEngine;
 public class WorldRotation
 {
     // Start is called before the first frame update
-    Vector3 point;
+    WorldPoint point;
 
-    public Vector3 Rotation
+    public WorldPoint Rotation
     {
         get
         {
