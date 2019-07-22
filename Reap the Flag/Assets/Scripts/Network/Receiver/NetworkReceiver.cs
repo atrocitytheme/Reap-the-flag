@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
+using System.Text;
 using UnityEngine;
 /// <summary>
 /// register the listening event for the client
@@ -12,16 +13,15 @@ using UnityEngine;
 public class NetworkReceiver : MonoBehaviour
 {
     public void registerClient(UdpClient client) {
-        client.BeginReceive(new AsyncCallback(recv(client)), null);    
+        client.BeginReceive(new AsyncCallback(recv(client)), client);
     }
 
     private Action<IAsyncResult> recv(UdpClient client) {
 
         return (IAsyncResult res) => {
-            Debug.Log("received!");
-            // RECEIVE FROM THE REOMOTE
             IPEndPoint remotePoint = new IPEndPoint(IPAddress.Any, 9956);
             Byte[] received = client.EndReceive(res, ref remotePoint);
+            Debug.Log("got: " + Encoding.UTF8.GetString(received));
             registerClient(client);
         };
     }

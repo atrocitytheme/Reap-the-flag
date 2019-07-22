@@ -8,6 +8,7 @@ public class TestModel
     private int commandType;
     private int roomId = 1;
     private int port = 5000;
+    private WorldLocation location;
 
     public string Ip {
         get {
@@ -46,6 +47,16 @@ public class TestModel
 
         set {
             port = value;
+        }
+    }
+
+    public WorldLocation Location {
+        get {
+            return location;
+        }
+
+        set {
+            location = value;
         }
     }
 }
