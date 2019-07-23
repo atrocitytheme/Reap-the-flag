@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameStateMachine : MonoBehaviour
 {
     public MessageClient messageClient;
-    private StateType state = StateType.NON_INITIALIZED;
+    private StateType state;
     public PlayerSpawnManager spawnManager;
     public MainPlayerSpawnManager playerSpawnManager;
     public StateType State {
@@ -17,14 +17,7 @@ public class GameStateMachine : MonoBehaviour
 
     private void Start()
     {
-        if (messageClient)
-        {
-            /*StartGame();*/
-        }
-
-        else {
-            Debug.LogError("should install messageClient before start his game");
-        }
+        state = StateType.NON_INITIALIZED;
     }
     public void StartGame() {
         if (state == StateType.NON_INITIALIZED) state = StateType.INITIALIZED;

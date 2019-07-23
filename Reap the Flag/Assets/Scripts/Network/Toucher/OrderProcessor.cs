@@ -62,9 +62,9 @@ public class OrderProcessor : MonoBehaviour
             if (commandType == 1) {
                               
             }
-
-            starter.StartGame();
         }
+
+        starter.StartGame();
     }
 
     private TestModel InitPlayerModel()
