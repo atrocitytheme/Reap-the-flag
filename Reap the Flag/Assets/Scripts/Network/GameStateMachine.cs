@@ -30,6 +30,7 @@ public class GameStateMachine : MonoBehaviour
         }
 
         if (state == StateType.INITIALIZED) {
+            playerSpawnManager.Player.Sync();
             TestModel m = playerSpawnManager.Player.model;
             m.CommandType = 1;
             messageClient.AskForUpdate(m);

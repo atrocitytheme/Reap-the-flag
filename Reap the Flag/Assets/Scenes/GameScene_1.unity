@@ -409,7 +409,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3d299a8bfd10bd44aaef7b2be4b3271, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 8808382899468728322, guid: a58f28380d9bff94abd9f77ddeb98434, type: 3}
+  player: {fileID: 1584191516717902191, guid: fb424a5ee7e1a744eb481b64c613724d, type: 3}
 --- !u!114 &1648072681
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -493,5 +493,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   messageClient: {fileID: 624455189}
-  spawnManager: {fileID: 0}
+  spawnManager: {fileID: 1648072681}
   playerSpawnManager: {fileID: 1648072680}
