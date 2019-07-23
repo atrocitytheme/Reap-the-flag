@@ -417,7 +417,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1648072679}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4a4a7e2d648a5ba409c1372317c18810, type: 3}
   m_Name: 
@@ -493,3 +493,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   messageClient: {fileID: 624455189}
+  spawnManager: {fileID: 0}
+  playerSpawnManager: {fileID: 1648072680}

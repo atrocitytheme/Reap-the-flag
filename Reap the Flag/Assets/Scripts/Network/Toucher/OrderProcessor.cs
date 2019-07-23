@@ -29,50 +29,52 @@ public class OrderProcessor : MonoBehaviour
         JArray result = JArray.Parse(json.Trim());
         foreach (JObject obj in result) {
             var id = obj["Id"].ToObject<string>();
+            var token = obj["Token"].ToObject<string>();
+            var lo = obj["Location"].ToObject<WorldLocation>();
             var commandType = obj["CommandType"].ToObject<int>();
+            var rr = new WorldRotation();
+
+            rr.Rotation = obj["Rotation"].ToObject<WorldPoint>();
+
+            TestModel newModel = InitPlayerModel();
+            newModel.Id = id;
+            newModel.RoomId = obj["RoomId"].ToObject<int>();
+            Debug.Log(rr.Rotation);
+            newModel.Rotation = rr;
+            newModel.Location = lo;
+
             Debug.Log("command: " + commandType);
-            Debug.Log(stateMachine.State);
             if (commandType == 0 && stateMachine.State == StateType.NON_INITIALIZED) {
                 Debug.Log("game started!");
-                starter.StartGame();
+                
+                if (token == "me")
+                {
+                    Debug.Log("me!");
+                    playerSpawnManager.SpawnPlayer(newModel);
+                }
+
+                else {
+                    Debug.Log("other!");
+                    spawnManager.SpawnPlayer(newModel);
+                }
             }
 
             if (commandType == 1) {
-                if (id.Equals(playerSpawnManager.Id))
-                {
-                    
-                }
-
-                else
-                {
-                    var rotation = obj["Rotation"];
-                    var rot = ExtractRotation(rotation);
-
-                    GameObject prop;
-                    if ((prop = spawnManager.RetrievePlayer(id)))
-                    {
-                        prop.transform.rotation = rot;
-                    }
-
-                }
+                              
             }
+
+            starter.StartGame();
         }
     }
 
-
-    private Vector3 ExtractPosition(JToken token) {
-
-        Vector3 newPos = new Vector3();
-        
-        return newPos;
-    }
-
-    private Quaternion ExtractRotation(JToken token) {
-        WorldRotation loc = token.ToObject<WorldRotation>();
-        WorldPoint pt = loc.Rotation;
-        Vector3 newRot = new Vector3((float)pt.X, (float)pt.Y, (float)pt.Z);
-        return Quaternion.Euler(newRot);
-        
+    private TestModel InitPlayerModel()
+    {
+        return new TestModel
+        {
+            CommandType = 0,
+            Location = new WorldLocation(),
+            Rotation = new WorldRotation(),
+        };
     }
 
 }

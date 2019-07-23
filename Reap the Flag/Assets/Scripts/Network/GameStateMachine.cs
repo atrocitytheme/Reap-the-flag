@@ -6,12 +6,15 @@ public class GameStateMachine : MonoBehaviour
 {
     public MessageClient messageClient;
     private StateType state = StateType.NON_INITIALIZED;
-
+    public PlayerSpawnManager spawnManager;
+    public MainPlayerSpawnManager playerSpawnManager;
     public StateType State {
         get {
             return state;
         }
     }
+
+
     private void Start()
     {
         if (messageClient)
@@ -24,16 +27,19 @@ public class GameStateMachine : MonoBehaviour
         }
     }
     public void StartGame() {
-        state = StateType.INITIALIZED;
+        if (state == StateType.NON_INITIALIZED) state = StateType.INITIALIZED;
     }
     private void FixedUpdate()
     {
+        Debug.Log(State);
         if (state == StateType.NON_INITIALIZED) {
             messageClient.AskForUpdate(new TestModel { CommandType = 0});
         }
 
         if (state == StateType.INITIALIZED) {
-            messageClient.AskForUpdate(new TestModel { CommandType=1, RoomId = 1});
+            TestModel m = playerSpawnManager.Player.model;
+            m.CommandType = 1;
+            messageClient.AskForUpdate(m);
         }
     }
     public void StopGame() {

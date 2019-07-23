@@ -1,11 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class MainPlayerSpawnManager : PlayerSpawnManager
+public class MainPlayerSpawnManager : MonoBehaviour
 {
     private string id = "null";
     private DataWrap curPlayer;
-
+    public GameObject player;
     public string Id {
         get {
             return id;
@@ -28,7 +28,7 @@ public class MainPlayerSpawnManager : PlayerSpawnManager
         }
     }
 
-    public override void SpawnPlayer(TestModel md) {
+    public void SpawnPlayer(TestModel md) {
         GameObject obj = Instantiate(player, Vector3.zero, Quaternion.identity);
         curPlayer = new DataWrap { gameObj = obj, model = md };
         this.id = curPlayer.model.Id;
@@ -37,6 +37,7 @@ public class MainPlayerSpawnManager : PlayerSpawnManager
     private bool playerExists() {
         return player != null;
     }
+
 
     public void DeleteCurPlayer() {
         Destroy(curPlayer.gameObj);

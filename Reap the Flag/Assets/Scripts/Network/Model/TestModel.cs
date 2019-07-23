@@ -8,6 +8,7 @@ public class TestModel
     private int roomId = 1;
     private int port = 5000;
     private string id;
+    private string token; // me or other
 
     private WorldLocation location;
     private WorldRotation rotation;
@@ -78,6 +79,12 @@ public class TestModel
 
         set {
             id = value;
+        }
+    }
+
+    public string Token {
+        get {
+            return token;
         }
     }
 }
