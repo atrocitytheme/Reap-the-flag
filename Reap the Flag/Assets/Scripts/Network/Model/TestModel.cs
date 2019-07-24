@@ -9,6 +9,8 @@ public class TestModel
     private int port = 5000;
     private string id;
     private string token; // me or other
+    private string password;
+    private string name;
 
     private WorldLocation location;
     private WorldRotation rotation;
@@ -85,6 +87,27 @@ public class TestModel
     public string Token {
         get {
             return token;
+        }
+    }
+
+    public string Password {
+        get
+        {
+            return password;
+        }
+
+        set {
+            password = value;
+        }
+    }
+
+    public string Name {
+        get {
+            return name;
+        }
+
+        set {
+            name = value;
         }
     }
 }

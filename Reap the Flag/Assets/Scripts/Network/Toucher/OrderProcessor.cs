@@ -26,46 +26,33 @@ public class OrderProcessor : MonoBehaviour
     }
     public void Process(string json) {
         Debug.Log(json);
-        JArray result = JArray.Parse(json.Trim());
-        foreach (JObject obj in result) {
-            var id = obj["Id"].ToObject<string>();
-            var token = obj["Token"].ToObject<string>();
-            var lo = obj["Location"].ToObject<WorldLocation>();
-            var commandType = obj["CommandType"].ToObject<int>();
-            var rr = new WorldRotation();
-
-            rr.Rotation = obj["Rotation"].ToObject<WorldPoint>();
-
-            TestModel newModel = InitPlayerModel();
-            newModel.Id = id;
-            newModel.RoomId = obj["RoomId"].ToObject<int>();
-            Debug.Log(rr.Rotation);
-            newModel.Rotation = rr;
-            newModel.Location = lo;
-
-            Debug.Log("command: " + commandType);
-            if (commandType == 0 && stateMachine.State == StateType.NON_INITIALIZED) {
-                Debug.Log("game started!");
-                
-                if (token == "me")
+        if (stateMachine.State == StateType.NON_INITIALIZED)
+        {
+            JArray result = JArray.Parse(json.Trim());
+            foreach (JObject obj in result)
+            {
+                var id = obj["Id"].ToObject<string>();
+                TestModel newModel = ProcessModel(obj);
+                if (id == PlayerPrefs.GetString("id"))
                 {
                     Debug.Log("me!");
                     playerSpawnManager.SpawnPlayer(newModel);
                 }
 
-                else {
-                    Debug.Log("other!");
+                else
+                {
                     spawnManager.SpawnPlayer(newModel);
                 }
+
             }
 
-            if (commandType == 1) {
-                              
-            }
+            starter.StartGame();
         }
+        else if (stateMachine.State == StateType.INITIALIZED) {
 
-        starter.StartGame();
+        }
     }
+
 
     private TestModel InitPlayerModel()
     {
@@ -77,4 +64,22 @@ public class OrderProcessor : MonoBehaviour
         };
     }
 
+    private TestModel ProcessModel(JObject obj) {
+        var id = obj["Id"].ToObject<string>();
+        var token = obj["Token"].ToObject<string>();
+        var lo = obj["Location"].ToObject<WorldLocation>();
+        var commandType = obj["CommandType"].ToObject<int>();
+        var rr = new WorldRotation();
+
+        rr.Rotation = obj["Rotation"].ToObject<WorldPoint>();
+
+        TestModel newModel = InitPlayerModel();
+        newModel.Id = id;
+        newModel.RoomId = obj["RoomId"].ToObject<int>();
+        Debug.Log(rr.Rotation);
+        newModel.Rotation = rr;
+        newModel.Location = lo;
+
+        return newModel;
+    }
 }
