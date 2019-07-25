@@ -61,7 +61,10 @@ public class OrderProcessor : MonoBehaviour
                 }
 
                 else if (model.CommandType == 1) {
-                    spawnManager.RetrievePlayer(model).SyncGameObject();
+                    DataWrap wrp = spawnManager.RetrievePlayer(model);
+                    wrp.model.Location = model.Location;
+                    wrp.model.Rotation = model.Rotation;
+                    wrp.SyncGameObject();
                 }
             }
         }
