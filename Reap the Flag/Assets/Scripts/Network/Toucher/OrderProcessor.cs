@@ -26,16 +26,15 @@ public class OrderProcessor : MonoBehaviour
     }
     public void Process(string json) {
         Debug.Log(json);
+        JArray result = JArray.Parse(json.Trim());
         if (stateMachine.State == StateType.NON_INITIALIZED)
         {
-            JArray result = JArray.Parse(json.Trim());
             foreach (JObject obj in result)
             {
                 var id = obj["Id"].ToObject<string>();
                 TestModel newModel = ProcessModel(obj);
                 if (id == PlayerPrefs.GetString("id"))
                 {
-                    Debug.Log("me!");
                     playerSpawnManager.SpawnPlayer(newModel);
                 }
 
@@ -49,7 +48,22 @@ public class OrderProcessor : MonoBehaviour
             starter.StartGame();
         }
         else if (stateMachine.State == StateType.INITIALIZED) {
+            foreach (JObject obj in result) {
 
+                TestModel model = ProcessModel(obj);
+
+                if (playerSpawnManager.IsPlayer(model)) continue;
+                // check if current player has been spawned or not
+                if (model.CommandType == 0 && 
+                    !spawnManager.Exists(model) 
+                    ) {
+                    spawnManager.SpawnPlayer(model);
+                }
+
+                else if (model.CommandType == 1) {
+                    spawnManager.RetrievePlayer(model).SyncGameObject();
+                }
+            }
         }
     }
 
@@ -65,6 +79,7 @@ public class OrderProcessor : MonoBehaviour
     }
 
     private TestModel ProcessModel(JObject obj) {
+
         var id = obj["Id"].ToObject<string>();
         var token = obj["Token"].ToObject<string>();
         var lo = obj["Location"].ToObject<WorldLocation>();
@@ -74,9 +89,9 @@ public class OrderProcessor : MonoBehaviour
         rr.Rotation = obj["Rotation"].ToObject<WorldPoint>();
 
         TestModel newModel = InitPlayerModel();
+        newModel.CommandType = commandType;
         newModel.Id = id;
         newModel.RoomId = obj["RoomId"].ToObject<int>();
-        Debug.Log(rr.Rotation);
         newModel.Rotation = rr;
         newModel.Location = lo;
 

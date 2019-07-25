@@ -12,88 +12,101 @@ public class LoginClient : MonoBehaviour
     public LoginPanelOperator panel;
     public string url;
     public InputField id;
-    public InputField name;
+    public InputField newName;
     public InputField password;
     HttpClient client = new HttpClient();
-    private string input_name;
-    private string input_password;
-    private string input_id;
+    private static readonly Queue<Action> queue = new Queue<Action>();
 
-    public string Name {
-        get
-        {
-            return input_name;
-        }
-    }
-
-    public string Id {
-        get {
-            return input_id; 
-        }
-    }
-
-    public string Password {
-        get {
-            return input_password;
-        }
-    }
     private void Awake()
     {
-        client.Timeout = TimeSpan.FromSeconds(1);
+        client.Timeout = TimeSpan.FromSeconds(5);
         client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("text/plain"));
-        DontDestroyOnLoad(this.gameObject);
+    }
+
+    private void Update()
+    {
+        HandleTask();
+    }
+
+    void HandleTask() {
+        while (queue.Count > 0) {
+            Action curTask = null;
+            lock (queue) {
+                if (queue.Count > 0) {
+                    curTask = queue.Dequeue();
+                }
+            }
+            curTask();
+        }
     }
 
     public void ConnecteToServer()
     {
-        var isSuccess = Task.Run(() => Request()).Result;
-
-        if (isSuccess)
-        {
-            PlayerPrefs.SetString("name", input_name);
-            PlayerPrefs.SetString("password", input_password);
-            PlayerPrefs.SetString("id", input_id);
-
-            SceneManager.LoadScene("GameScene_1");
-            return;
-        }
-
-        panel.DisplayInfo(isSuccess);
-        
+        Task.Run(() => Request());
     }
     private string extractFromInput(InputField field) {
         return field.text;
     }
 
-    private async Task<bool> Request() {
+    private async Task Request() {
+        string input_name = extractFromInput(newName);
+        string input_password = extractFromInput(password);
+        string input_id = extractFromInput(id);
+        string phrase = "not initialized";
         try
         {
-            input_name = extractFromInput(name);
-            input_password = extractFromInput(password);
-            input_id = extractFromInput(id);
             var content = new FormUrlEncodedContent(new KeyValuePair<string, string>[]{
                 new KeyValuePair<string, string>("Name", input_name),
                 new KeyValuePair<string, string>("Password", input_password),
                 new KeyValuePair<string, string>("Id", input_id)
             });
             var msg = await client.PostAsync(url, content);
+            phrase = await msg.Content.ReadAsStringAsync();
             msg.EnsureSuccessStatusCode();
         }
         catch (HttpRequestException)
         {
-            return false;
+            Debug.Log("phrase: " + phrase);
+            QueueOnMainThread(()=> {
+                panel.DisplayInfo(phrase);
+            });
+            return;
         }
 
         catch (InvalidOperationException)
         {
-            return false;
+            QueueOnMainThread(() => {
+                panel.DisplayInfo(phrase);
+            });
+            return;
         }
 
         catch (TaskCanceledException)
         {
-            return false;
+            QueueOnMainThread(() => {
+                panel.DisplayInfo(phrase);
+            });
+            return;
         }
 
-        return true;
+        QueueOnMainThread(() => {
+            PlayerPrefs.SetString("newName", input_name);
+            PlayerPrefs.SetString("password", input_password);
+            PlayerPrefs.SetString("id", input_id);
+            panel.DisplayInfo("loading scene...");
+            try
+            {
+                SceneManager.LoadScene("GameScene_1");
+            }
+            catch (Exception e) {
+                panel.DisplayInfo("error occurs!");
+            }
+        });
+    }
+
+    public void QueueOnMainThread(Action act) {
+        lock (queue) {
+            queue.Enqueue(act);
+        }
     }
 }

@@ -5,9 +5,9 @@ using UnityEngine;
 public class WorldPoint
 {
     // Start is called before the first frame update
-    double x, y, z;
+    float x, y, z;
 
-    public double X {
+    public float X {
         get {
             return x;
         }
@@ -17,7 +17,7 @@ public class WorldPoint
         }
     }
 
-    public double Y
+    public float Y
     {
         get
         {
@@ -30,7 +30,7 @@ public class WorldPoint
         }
     }
 
-    public double Z
+    public float Z
     {
         get
         {
@@ -41,5 +41,11 @@ public class WorldPoint
         {
             z = value;
         }
+    }
+    public override string ToString()
+    {
+        return "x: " + x +
+            "y: " + y +
+            "z: " + z;
     }
 }

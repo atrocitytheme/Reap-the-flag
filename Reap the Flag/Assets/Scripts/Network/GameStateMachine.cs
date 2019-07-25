@@ -15,7 +15,7 @@ public class GameStateMachine : MonoBehaviour
     }
 
     private string id;
-    private string name;
+    private string newName;
     private string password;
 
 
@@ -25,8 +25,7 @@ public class GameStateMachine : MonoBehaviour
         state = StateType.NON_INITIALIZED;
         id = PlayerPrefs.GetString("id");
         password = PlayerPrefs.GetString("password");
-        name = PlayerPrefs.GetString("name");
-
+        newName = PlayerPrefs.GetString("newName");
     }
     public void StartGame() {
         if (state == StateType.NON_INITIALIZED) state = StateType.INITIALIZED;
@@ -40,10 +39,10 @@ public class GameStateMachine : MonoBehaviour
         }
 
         if (state == StateType.INITIALIZED) {
-            playerSpawnManager.Player.Sync();
+            playerSpawnManager.Player.SyncModel();
             TestModel m = playerSpawnManager.Player.model;
             m.CommandType = 1;
-            m.Name = name;
+            m.Name = newName;
             m.Password = password;
             m.Id = id;
             messageClient.AskForUpdate(m);
@@ -52,14 +51,14 @@ public class GameStateMachine : MonoBehaviour
     public void StopGame() {
         state = StateType.IDLE;
     }
-    // configure basic model with passsword, id and name
+    // configure basic model with passsword, id and newName
     private TestModel ConfigureBasicModel() {
         return new TestModel
         {
             CommandType = 0,
             Id = id,
             Password = password,
-            Name = name
+            Name = newName
         };
     }
 }

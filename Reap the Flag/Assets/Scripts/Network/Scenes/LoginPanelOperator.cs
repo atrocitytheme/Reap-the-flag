@@ -6,14 +6,12 @@ using UnityEngine.UI;
 public class LoginPanelOperator : MonoBehaviour
 {
     public Text infoBoard;
-    static float timeout = 1.0f;  // the time out of the display info
+    static float timeout = 10.0f;  // the time out of the display info
     float timer = 0f;
     // Start is called before the first frame update
-    public void DisplayInfo(bool isSuccess) {
-        if (!isSuccess) {
-            infoBoard.text = "Login failed!";
-            timer = timeout;
-        }
+    public void DisplayInfo(string phrase) {
+        infoBoard.text = phrase;
+        timer = timeout;
     }
 
     private void Update()

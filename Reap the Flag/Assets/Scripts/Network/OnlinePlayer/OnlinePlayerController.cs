@@ -9,8 +9,6 @@ public class OnlinePlayerController : MonoBehaviour
     Animator anim;                      // Reference to the animator component.
     Rigidbody playerRigidbody;          // Reference to the player's rigidbody.
     Vector3 prev;
-    float h = 0; // the rotation direction of mouse x
-    float v = 0; // the rotation direction of mouse y
     void Awake()
     {
         anim = GetComponent<Animator>();

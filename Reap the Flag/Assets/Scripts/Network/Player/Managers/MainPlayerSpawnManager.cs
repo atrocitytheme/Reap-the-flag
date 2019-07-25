@@ -44,14 +44,7 @@ public class MainPlayerSpawnManager : MonoBehaviour
         curPlayer = null;
     }
 
-
-    public TestModel RetrieveModel(int commandType) {
-        TestModel model = new TestModel {
-            CommandType = commandType,
-            Id = id,
-            RoomId = curPlayer.model.RoomId
-        };
-
-        return model;
+    public bool IsPlayer(TestModel model) {
+        return curPlayer.model.Id.Equals(model.Id);
     }
 }

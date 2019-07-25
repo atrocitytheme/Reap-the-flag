@@ -5064,7 +5064,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 2.605e-42, y: 6e-44, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 0, y: NaN, z: 0, w: 0.00005821709}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -5212,6 +5212,18 @@ Transform:
   m_Father: {fileID: 742230813}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1948208995 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4710862424911150788, guid: ddb05baf89b5d0341b47e480bf1e3706,
+    type: 3}
+  m_PrefabInstance: {fileID: 1282877851342042220}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 575553740, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2085935754
 GameObject:
   m_ObjectHideFlags: 0
@@ -5361,6 +5373,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1282877850298142725, guid: ddb05baf89b5d0341b47e480bf1e3706,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6126494004399142830, guid: ddb05baf89b5d0341b47e480bf1e3706,
+        type: 3}
+      propertyPath: newName
+      value: 
+      objectReference: {fileID: 1948208995}
+    - target: {fileID: 1282877851850156997, guid: ddb05baf89b5d0341b47e480bf1e3706,
+        type: 3}
+      propertyPath: m_Text
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ddb05baf89b5d0341b47e480bf1e3706, type: 3}

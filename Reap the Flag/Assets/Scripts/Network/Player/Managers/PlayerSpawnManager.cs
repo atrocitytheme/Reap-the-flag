@@ -7,8 +7,9 @@ public class PlayerSpawnManager : MonoBehaviour
     Dictionary<string, DataWrap> players = new Dictionary<string, DataWrap>();
     public GameObject player;
 
-    public GameObject RetrievePlayer(string id) {
-        if (players.ContainsKey(id)) return players[id].gameObj;
+    public DataWrap RetrievePlayer(TestModel model) {
+        if (model == null) return null;
+        if (players.ContainsKey(model.Id)) return players[model.Id];
 
         return null;
     }
@@ -17,7 +18,6 @@ public class PlayerSpawnManager : MonoBehaviour
     {
         WorldPoint pt = md.Location.Location;
         WorldPoint rt = md.Rotation.Rotation;
-        Debug.Log(rt);
         Vector3 spin = new Vector3((float)rt.X, (float)rt.Y, (float)rt.Z);
         GameObject obj = Instantiate(player, new Vector3((float)pt.X, (float)pt.Y, (float)pt.Z), Quaternion.Euler(spin));
         players.Add(md.Id, new DataWrap { gameObj = obj, model = md});
@@ -28,5 +28,14 @@ public class PlayerSpawnManager : MonoBehaviour
             Destroy(players[id].gameObj);
             players.Remove(id);
         }
+    }
+
+    public bool Exists(TestModel model) {
+        return players.ContainsKey(model.Id);
+    }
+
+    public void MovePlayer(TestModel model) {
+        DataWrap wrapper = RetrievePlayer(model);
+        if (wrapper == null) return;
     }
 }
