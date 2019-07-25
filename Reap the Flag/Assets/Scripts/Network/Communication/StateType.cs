@@ -7,5 +7,8 @@ public enum StateType
     // Start is called before the first frame update
     NON_INITIALIZED,
     INITIALIZED,
-    IDLE
+    IDLE,
+    DAMAGED,
+    DAMAGING,
+    PENDING
 }

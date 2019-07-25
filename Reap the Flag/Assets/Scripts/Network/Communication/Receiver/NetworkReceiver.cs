@@ -5,7 +5,7 @@ using System.Net.Sockets;
 using System.Text;
 using UnityEngine;
 /// <summary>
-/// register the listening event for the client
+/// register the listening event for the client and process any async events
 /// </summary>
 [RequireComponent(typeof(OrderProcessor))]
 public class NetworkReceiver : MonoBehaviour { 

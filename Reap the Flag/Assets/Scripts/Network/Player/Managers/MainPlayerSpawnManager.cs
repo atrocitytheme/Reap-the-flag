@@ -34,8 +34,8 @@ public class MainPlayerSpawnManager : MonoBehaviour
         this.id = curPlayer.model.Id;
     }
 
-    private bool playerExists() {
-        return player != null;
+    public bool PlayerExists() {
+        return curPlayer != null;
     }
 
 
