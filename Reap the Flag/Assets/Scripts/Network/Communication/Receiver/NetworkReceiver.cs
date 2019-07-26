@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading.Tasks;
 using UnityEngine;
 /// <summary>
 /// register the listening event for the client and process any async events
@@ -11,6 +12,7 @@ using UnityEngine;
 public class NetworkReceiver : MonoBehaviour { 
     private static readonly Queue<Action> tasks = new Queue<Action>();
     private OrderProcessor processor;
+    private bool tcpOpen = false;
 
     private void Awake()
     {
@@ -44,10 +46,8 @@ public class NetworkReceiver : MonoBehaviour {
         return (IAsyncResult res) => {
             IPEndPoint remotePoint = new IPEndPoint(IPAddress.Any, 9956);
             Byte[] received = client.EndReceive(res, ref remotePoint);
-            string order = Encoding.UTF8.GetString(received);
             QueueMainThreadWork(() => {
-/*                Debug.Log("got: " + Encoding.UTF8.GetString(received));
-*/                processor.Process(Encoding.UTF8.GetString(received));
+                processor.Process(Encoding.UTF8.GetString(received));
             });
         };
     }
@@ -55,6 +55,43 @@ public class NetworkReceiver : MonoBehaviour {
     public void QueueMainThreadWork(Action task) {
         lock (tasks) {
             tasks.Enqueue(task);
+        }
+    }
+
+    public void ProcessTcpMessage(TcpClient client, int tcpLength)
+    {
+        if (!tcpOpen) // since it's keep-alive connection
+        {
+            tcpOpen = true;
+            Task.Run(() => AsyncRead(client, tcpLength));
+        }
+    }
+
+    private async Task AsyncRead(TcpClient client, int tcpLength) {
+        Byte[] received = new byte[tcpLength];
+        NetworkStream stream = client.GetStream();
+        int total = 0;
+        int offset = 0;
+        while (true) {
+            try
+            {
+                var curBytes = await stream.ReadAsync(received, offset, tcpLength - total);
+                total += curBytes;
+                offset += curBytes;
+                if (total == tcpLength)
+                {
+                    QueueMainThreadWork(() =>
+                    {
+                        processor.ProcessTcp(Encoding.UTF8.GetString(received));
+                    });
+                    offset = 0;
+                    total = 0;
+                }
+            }
+            catch (Exception) {
+                tcpOpen = false;
+                return;
+            }
         }
     }
 }

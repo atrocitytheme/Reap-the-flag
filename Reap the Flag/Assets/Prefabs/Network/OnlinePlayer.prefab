@@ -5173,6 +5173,7 @@ GameObject:
   - component: {fileID: 5127656183958613394}
   - component: {fileID: 5127656183958259154}
   - component: {fileID: 5127656183957814546}
+  - component: {fileID: 7782397407966850522}
   m_Layer: 9
   m_Name: GunBarrelEnd
   m_TagString: Untagged
@@ -10190,7 +10191,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5127656183964282934}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6c83720df9acb89488dbf2c0dbd3ad78, type: 3}
   m_Name: 
@@ -10259,6 +10260,22 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &7782397407966850522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5127656183964282934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81377555211a3c842b5eccb46fc24775, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damagePerShot: 20
+  timeBetweenBullets: 0.15
+  range: 10
+  faceLight: {fileID: 5127656183957814544}
 --- !u!1 &5127656183964282938
 GameObject:
   m_ObjectHideFlags: 0

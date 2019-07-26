@@ -5,6 +5,7 @@ using System.Net.Sockets;
 using System;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(NetworkReceiver))]
 public class MessageClient : MonoBehaviour
@@ -20,13 +21,20 @@ public class MessageClient : MonoBehaviour
     private void Awake()
     {
         receiver = GetComponent<NetworkReceiver>();
-        remoteEP = new IPEndPoint(IPAddress.Parse(ip), port);
+        remoteEP = new IPEndPoint(IPAddress.Parse(ip), 9956);
         tcpClient.ReceiveTimeout = 5000;
     }
 
+    private void Start()
+    {
+       
+    }
+
     public async Task Connect() {
+        Debug.Log("connecting......");
         if (connecting) return;
         connecting = true;
+        Debug.Log("proceeding connection...");
         await tcpClient.ConnectAsync(ip, port);
         receiver.QueueMainThreadWork(() =>
         {
@@ -42,11 +50,12 @@ public class MessageClient : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(tcpClient.Connected);
-        if (!tcpClient.Connected)
+        /*if (!tcpClient.Connected)
         {
             stateMachine?.Pend();
-        }
+            tcpClient = new TcpClient();
+            connecting = false;
+        }*/
     }
     public void AskForUpdate(TestModel modelMessage) {
         SendData(JsonConvert.SerializeObject(modelMessage), udpClient);
@@ -59,11 +68,16 @@ public class MessageClient : MonoBehaviour
     }
 
     public void AskForKeyFrame(TestModel modelMessage) {
-        
+        SendKeyFrame(JsonConvert.SerializeObject(modelMessage), tcpClient);
     }
 
     public void SendKeyFrame(string dataSent, TcpClient client) {
-
+        Byte[] data = Encoding.UTF8.GetBytes(dataSent);
+        NetworkStream stream = client.GetStream();
+        if (stream.CanWrite) {
+            stream.WriteAsync(data, 0, data.Length);
+            receiver.ProcessTcpMessage(client, data.Length);
+        }
     }
 
     private void OnDestroy()
@@ -72,16 +86,11 @@ public class MessageClient : MonoBehaviour
     }
 
     public bool TestTcpConnection(TcpClient client) {
-        if (client.Client.Poll(0, SelectMode.SelectRead)) {
-            byte[] buff = new byte[1];
+        if (client == null) return false;
+        return client.Connected;
+    }
 
-            if (client.Client.Receive(buff, SocketFlags.Peek) == 0) {
-                return false;
-            }
-
-            return true;
-        }
-
-        return true;
+    public bool TestTcpConnection() {
+        return TestTcpConnection(tcpClient);
     }
 }

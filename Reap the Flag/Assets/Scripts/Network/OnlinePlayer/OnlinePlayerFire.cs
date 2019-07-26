@@ -38,11 +38,6 @@ public class OnlinePlayerFire : MonoBehaviour
         timer += Time.deltaTime;
 
         // If the Fire1 button is being press and it's time to fire...
-        if (Input.GetButton("Fire1") && timer >= timeBetweenBullets && Time.timeScale != 0)
-        {
-            // ... shoot the gun.
-            Shoot();
-        }
 
         // If the timer has exceeded the proportion of timeBetweenBullets that the effects should be displayed for...
         if (timer >= timeBetweenBullets * effectsDisplayTime)
@@ -64,7 +59,7 @@ public class OnlinePlayerFire : MonoBehaviour
     }
 
 
-    void Shoot()
+    public void Shoot()
     {
         timer = 0f;
         gunAudio.Play();

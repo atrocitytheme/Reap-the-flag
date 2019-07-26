@@ -25,7 +25,7 @@ public class OrderProcessor : MonoBehaviour
         adjuster = facade.GetComponent<PositionAdjuster>();
     }
     public void Process(string json) {
-        Debug.Log(json);
+
         JArray result = JArray.Parse(json.Trim());
         if (stateMachine.State == StateType.NON_INITIALIZED)
         {
@@ -64,12 +64,16 @@ public class OrderProcessor : MonoBehaviour
                     DataWrap wrp = spawnManager.RetrievePlayer(model);
                     wrp.model.Location = model.Location;
                     wrp.model.Rotation = model.Rotation;
+                    wrp.model.IsShooting = model.IsShooting;
                     wrp.SyncGameObject();
                 }
             }
         }
     }
 
+    public void ProcessTcp(string json) {
+        Debug.LogError("tcp received!");
+    }
 
     private TestModel InitPlayerModel()
     {
@@ -87,6 +91,7 @@ public class OrderProcessor : MonoBehaviour
         var token = obj["Token"].ToObject<string>();
         var lo = obj["Location"].ToObject<WorldLocation>();
         var commandType = obj["CommandType"].ToObject<int>();
+        var isShooting = obj["IsShooting"].ToObject<bool>();
         var rr = new WorldRotation();
 
         rr.Rotation = obj["Rotation"].ToObject<WorldPoint>();
@@ -97,6 +102,7 @@ public class OrderProcessor : MonoBehaviour
         newModel.RoomId = obj["RoomId"].ToObject<int>();
         newModel.Rotation = rr;
         newModel.Location = lo;
+        newModel.IsShooting = isShooting;
 
         return newModel;
     }

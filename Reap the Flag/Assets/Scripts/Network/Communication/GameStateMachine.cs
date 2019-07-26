@@ -1,6 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameStateMachine : MonoBehaviour
 {
@@ -52,16 +55,20 @@ public class GameStateMachine : MonoBehaviour
         if (state == StateType.PENDING)
         {
             warningSign?.SetActive(true);
-            messageClient.Connect();
+            Task.Run(()=> messageClient.Connect());
         }
         else {
             warningSign?.SetActive(false);
         }
 
         if (state == StateType.NON_INITIALIZED) {
+            warningSign?.SetActive(true);
             TestModel generationCommand = ConfigureBasicModel();
             generationCommand.CommandType = 0;
+          
             messageClient.AskForUpdate(generationCommand);
+            
+            
         }
 
         if (state == StateType.INITIALIZED) {
@@ -74,16 +81,22 @@ public class GameStateMachine : MonoBehaviour
             messageClient.AskForUpdate(m);
         }
 
-        if (state == StateType.DAMAGED)
-        {
-
+        if (state == StateType.DAMAGED){
             state = StateType.INITIALIZED;
         }
 
         if (state == StateType.DAMAGING) {
             state = StateType.INITIALIZED;
         }
+
+        CheckNetWork();
     }
+
+    private void CheckNetWork() {
+        if (messageClient.TestTcpConnection())
+        messageClient.AskForKeyFrame(new TestModel { CommandType=101});
+    }
+
     public void StopGame() {
         state = StateType.IDLE;
     }

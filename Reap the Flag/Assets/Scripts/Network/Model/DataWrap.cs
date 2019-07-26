@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using PlayerComponent;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,6 +21,11 @@ public class DataWrap
         Vector3 newRotation = new Vector3(rt.X, rt.Y, rt.Z);
 
         gameObj.transform.eulerAngles = newRotation;
+        Debug.Log("shootingSTAR... " + model.IsShooting);
+        if (model.IsShooting)
+        {
+            gameObj.GetComponentInChildren<OnlinePlayerFire>()?.Shoot();
+        }
     }
 
     // sync model with the gameobj
@@ -36,6 +42,8 @@ public class DataWrap
         pt.Z = q.z;
         model.Location.Location = loc;
         model.Rotation.Rotation = pt;
+        PlayerShooting shooterScript = gameObj.GetComponentInChildren<PlayerShooting>();
+        model.IsShooting = shooterScript.isShooting;
 
     }
 }

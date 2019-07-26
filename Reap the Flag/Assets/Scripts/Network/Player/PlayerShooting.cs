@@ -10,7 +10,8 @@ namespace PlayerComponent
         public int damagePerShot = 20;                  // The damage inflicted by each bullet.
         public float timeBetweenBullets = 0.15f;        // The time between each shot.
         public float range = 10f;                      // The distance the gun can fire.
-
+        public bool isShooting;
+        private bool shooted;
         float timer;                                    // A timer to determine when to fire.
         Ray shootRay = new Ray();                       // A ray from the gun end forwards.
         RaycastHit shootHit;                            // A raycast hit to get information about what was hit.
@@ -52,6 +53,10 @@ namespace PlayerComponent
                 DisableEffects ();
             }
 
+            if (Input.GetButtonUp("Fire1")) {
+                isShooting = false;
+            }
+
             // restore the shot color
         }
 
@@ -67,6 +72,7 @@ namespace PlayerComponent
 
         void Shoot ()
         {
+            isShooting = true;
             timer = 0f;
             gunAudio.Play ();
             // enable visual effects

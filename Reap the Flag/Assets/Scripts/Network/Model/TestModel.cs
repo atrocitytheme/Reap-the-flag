@@ -1,6 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+[Serializable]
 public class TestModel
 {
     private string ip = System.Net.Dns.GetHostName();
@@ -11,6 +14,7 @@ public class TestModel
     private string token; // me or other
     private string password;
     private string name;
+    private bool isShooting;
 
     private WorldLocation location;
     private WorldRotation rotation;
@@ -108,6 +112,17 @@ public class TestModel
 
         set {
             name = value;
+        }
+    }
+
+    public bool IsShooting {
+        get
+        {
+            return isShooting;
+        }
+
+        set {
+            isShooting = value;
         }
     }
 }
