@@ -40,11 +40,15 @@ public class MainPlayerSpawnManager : MonoBehaviour
 
 
     public void DeleteCurPlayer() {
-        Destroy(curPlayer.gameObj);
+        Die();
         curPlayer = null;
     }
 
     public bool IsPlayer(TestModel model) {
         return curPlayer.model.Id.Equals(model.Id);
+    }
+
+    public void Die() {
+        Destroy(curPlayer.gameObj);
     }
 }

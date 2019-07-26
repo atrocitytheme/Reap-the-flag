@@ -19,6 +19,7 @@ namespace PlayerComponent
         AudioSource playerAudio;                                    // Reference to the AudioSource component.
         PlayerController playerMovement;                              // Reference to the player's movement.
         PlayerShooting playerShooting;
+        GameStateMachine stateMachine;
         public ParticleSystem particleHits;
 
         bool isDead;                                                // Whether the player is dead.
@@ -34,6 +35,7 @@ namespace PlayerComponent
             playerShooting = GetComponentInChildren <PlayerShooting> ();
             // Set the initial health of the player.
             currentHealth = startingHealth;
+            stateMachine = GameObject.Find("/NetworkTesting/Communicator").GetComponent<GameStateMachine>();
         }
 
         private void Start()
@@ -80,12 +82,13 @@ namespace PlayerComponent
             if(currentHealth <= 0 && !isDead)
             {
                 // ... it should die.
-                Death();
+                /*Death();*/
+                stateMachine.DeathState();
             }
         }
 
 
-        void Death ()
+        public void Death ()
         {
             // Set the death flag so this function won't be called again.
             isDead = true;

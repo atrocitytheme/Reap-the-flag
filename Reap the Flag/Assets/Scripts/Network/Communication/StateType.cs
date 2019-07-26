@@ -8,7 +8,8 @@ public enum StateType
     NON_INITIALIZED,
     INITIALIZED,
     IDLE,
-    DAMAGED,
-    DAMAGING,
-    PENDING
+    DAMAGED, // state when damaged
+    KILLED, // state when killed
+    PENDING,
+    OB
 }

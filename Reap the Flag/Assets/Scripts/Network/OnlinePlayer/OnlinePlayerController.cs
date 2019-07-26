@@ -5,7 +5,7 @@ using UnityEngine;
 public class OnlinePlayerController : MonoBehaviour
 {
     // Start is called before the first frame update
-    
+
     Animator anim;                      // Reference to the animator component.
     Rigidbody playerRigidbody;          // Reference to the player's rigidbody.
     Vector3 prev;
@@ -15,9 +15,8 @@ public class OnlinePlayerController : MonoBehaviour
         playerRigidbody = GetComponent<Rigidbody>();
     }
 
-    void Move(Vector3 vec)
+    public void Move(Vector3 vec)
     {
-        playerRigidbody.MovePosition(vec);
         bool r = prev == null || prev != vec;
         anim.SetBool("IsWalking", r);
         prev = vec;

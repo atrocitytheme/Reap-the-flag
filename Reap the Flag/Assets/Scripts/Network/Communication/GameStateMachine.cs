@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PlayerComponent;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -85,8 +86,21 @@ public class GameStateMachine : MonoBehaviour
             state = StateType.INITIALIZED;
         }
 
-        if (state == StateType.DAMAGING) {
-            state = StateType.INITIALIZED;
+        if (state == StateType.KILLED) {
+            Debug.Log("asdasd");
+            playerSpawnManager.Player.gameObj.GetComponent<PlayerHealth>().Death();
+            playerSpawnManager.Die();
+
+            state = StateType.OB;
+        }
+
+        if (state == StateType.OB) {
+            TestModel m = playerSpawnManager.Player.model;
+            m.CommandType = 1;
+            m.Name = newName;
+            m.Password = password;
+            m.Id = id;
+            messageClient.AskForUpdate(m);
         }
 
         CheckNetWork();
@@ -109,5 +123,13 @@ public class GameStateMachine : MonoBehaviour
             Password = password,
             Name = newName
         };
+    }
+
+    public void DeathState() {
+        if (state != StateType.NON_INITIALIZED || 
+            state != StateType.IDLE || 
+            state != StateType.KILLED) {
+            state = StateType.KILLED;
+        }
     }
 }

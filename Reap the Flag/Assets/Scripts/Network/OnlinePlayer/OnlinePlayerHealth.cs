@@ -12,11 +12,11 @@ public class OnlinePlayerHealth : MonoBehaviour
     public AudioClip deathClip;                                 // The audio clip to play when the player dies.
     public float flashSpeed = 5f;                               // The speed the damageImage will fade at.
     public Color flashColour = new Color(1f, 0f, 0f, 0.7f);     // The colour the damageImage is set to, to flash.
-    public Image damageImage;
     Animator anim;                                              // Reference to the Animator component.
     AudioSource playerAudio;                                    // Reference to the AudioSource component.
     PlayerController playerMovement;                              // Reference to the player's movement.
     PlayerShooting playerShooting;
+    GameStateMachine stateMachine;
     public ParticleSystem particleHits;
 
     bool isDead;                                                // Whether the player is dead.
@@ -32,26 +32,11 @@ public class OnlinePlayerHealth : MonoBehaviour
         playerShooting = GetComponentInChildren<PlayerShooting>();
         // Set the initial health of the player.
         currentHealth = startingHealth;
-    }
-
-    private void Start()
-    {
-        
+        stateMachine = GameObject.Find("/NetworkTesting/Communicator").GetComponent<GameStateMachine>();
     }
 
     void Update()
     {
-        // If the player has just been damaged...
-        if (damaged)
-        {
-            // ... set the colour of the damageImage to the flash colour.
-            damageImage.color = flashColour;
-        }
-        else
-        {
-            /*damageImage.color = Color.Lerp(damageImage.color, defaultColor, Time.deltaTime * recoverSpeed);*/
-        }
-
         // Reset the damaged flag.
         damaged = false;
     }

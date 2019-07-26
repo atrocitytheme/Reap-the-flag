@@ -25,7 +25,7 @@ public class OrderProcessor : MonoBehaviour
         adjuster = facade.GetComponent<PositionAdjuster>();
     }
     public void Process(string json) {
-
+        Debug.Log("getting values...");
         JArray result = JArray.Parse(json.Trim());
         if (stateMachine.State == StateType.NON_INITIALIZED)
         {
@@ -47,20 +47,24 @@ public class OrderProcessor : MonoBehaviour
 
             starter.StartGame();
         }
-        else if (stateMachine.State == StateType.INITIALIZED) {
-            foreach (JObject obj in result) {
+        else if (stateMachine.State == StateType.INITIALIZED || stateMachine.State == StateType.OB)
+        {
+            foreach (JObject obj in result)
+            {
 
                 TestModel model = ProcessModel(obj);
 
                 if (playerSpawnManager.IsPlayer(model)) continue;
                 // check if current player has been spawned or not
-                if (model.CommandType == 0 && 
-                    !spawnManager.Exists(model) 
-                    ) {
+                if (model.CommandType == 0 &&
+                    !spawnManager.Exists(model)
+                    )
+                {
                     spawnManager.SpawnPlayer(model);
                 }
 
-                else if (model.CommandType == 1) {
+                else if (model.CommandType == 1)
+                {
                     DataWrap wrp = spawnManager.RetrievePlayer(model);
                     wrp.model.Location = model.Location;
                     wrp.model.Rotation = model.Rotation;

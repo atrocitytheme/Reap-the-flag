@@ -15,7 +15,7 @@ public class DataWrap
 
         Vector3 newLocation = new Vector3((float)pt.X, (float)pt.Y, (float)pt.Z);
         gameObj.transform.position = newLocation;
-
+        gameObj.GetComponent<OnlinePlayerController>().Move(newLocation);
         WorldPoint rt = model.Rotation.Rotation;
 
         Vector3 newRotation = new Vector3(rt.X, rt.Y, rt.Z);
