@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
+[RequireComponent(typeof(NetworkReceiver))]
 public class KetFrameClient : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -38,7 +39,7 @@ public class KetFrameClient : MonoBehaviour
             if (tcpClient.Connected)
             {
                 Debug.Log("Tcp connected!");
-                stateMachine?.FinishConnect();
+                stateMachine.FinishConnect();
             }
             connecting = false;
         });
@@ -57,7 +58,7 @@ public class KetFrameClient : MonoBehaviour
         if (stream.CanWrite)
         {
             stream.WriteAsync(data, 0, data.Length);
-            receiver.ProcessTcpMessage(client, data.Length);
+            receiver.ProcessTcpMessage(client, 5);
         }
     }
 
@@ -67,6 +68,7 @@ public class KetFrameClient : MonoBehaviour
         {
             stateMachine?.Pend();
             tcpClient = new TcpClient();
+            receiver.UpdateReceiver();
             connecting = false;
         }
     }

@@ -16,6 +16,7 @@ public class GameStateMachine : MonoBehaviour
     public GameObject warningSign;
     public ObSpawnManager obManager;
 
+    int networkTimeout = 0;
     public StateType State {
         get {
             return state;
@@ -95,6 +96,7 @@ public class GameStateMachine : MonoBehaviour
             obManager.RegisterInfo(playerSpawnManager.Player.model);
             playerSpawnManager.Die();
             state = StateType.OB;
+            ketFrameClient.AskForKeyFrame(new TestModel { CommandType=6, Name=newName, Password=password, Id=id});
         }
 
         if (state == StateType.OB) {
@@ -109,15 +111,19 @@ public class GameStateMachine : MonoBehaviour
                 obManager.Spawn();
             }
         }
-
-        CheckNetWork();
+        if (networkTimeout <= 0)
+        {
+            CheckNetWork();
+            networkTimeout = 100;
+        }
+        networkTimeout -= 1;
     }
 
     private void CheckNetWork() {
         /*if (messageClient.TestTcpConnection())
         messageClient.AskForKeyFrame(new TestModel { CommandType=101});*/
         if (ketFrameClient.TestTcpConnection()) {
-            ketFrameClient.AskForKeyFrame(new TestModel { CommandType = 101});
+            ketFrameClient.AskForKeyFrame(new TestModel { CommandType = 101, Id=id, Name = newName, Password=password});
         }
     }
 

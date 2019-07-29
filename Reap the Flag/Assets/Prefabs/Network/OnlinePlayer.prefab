@@ -4900,11 +4900,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5127656183963921428}
   - component: {fileID: 5127656183957013490}
-  - component: {fileID: 5127656183958259158}
   - component: {fileID: 3471841282906229205}
   - component: {fileID: 24625564393414040}
   - component: {fileID: 5127656183969436498}
-  - component: {fileID: 5127656183958259152}
   - component: {fileID: 5127656183960220562}
   - component: {fileID: 5127656183971850704}
   - component: {fileID: 5127656183102674827}
@@ -4954,26 +4952,6 @@ Animator:
   m_HasTransformHierarchy: 0
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &5127656183958259158
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5127656183964282932}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c32067ea884548644b13cf9baddd4573, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startingHealth: 100
-  currentHealth: 0
-  healthSlider: {fileID: 0}
-  damageImage: {fileID: 0}
-  deathClip: {fileID: 8300000, guid: d36a393bca4582043982db9089e1694f, type: 3}
-  flashSpeed: 5
-  flashColour: {r: 1, g: 0, b: 0, a: 0.09803922}
-  particleHits: {fileID: 1707036150435902461}
 --- !u!114 &3471841282906229205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4991,7 +4969,6 @@ MonoBehaviour:
   deathClip: {fileID: 8300000, guid: d36a393bca4582043982db9089e1694f, type: 3}
   flashSpeed: 5
   flashColour: {r: 1, g: 0, b: 0, a: 0.7}
-  damageImage: {fileID: 4843077157746802724}
   particleHits: {fileID: 1707036150435902461}
 --- !u!114 &24625564393414040
 MonoBehaviour:
@@ -5021,20 +4998,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
---- !u!114 &5127656183958259152
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5127656183964282932}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b2268f9c7df8764aa2e92dbf55b5ae1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 5
-  rotateSmooth: 5
 --- !u!136 &5127656183960220562
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -5176,7 +5139,6 @@ MonoBehaviour:
   deathClip: {fileID: 8300000, guid: d36a393bca4582043982db9089e1694f, type: 3}
   flashSpeed: 5
   flashColour: {r: 1, g: 0, b: 0, a: 0.7}
-  damageImage: {fileID: 0}
   particleHits: {fileID: 1707036150435902461}
 --- !u!1 &5127656183964282934
 GameObject:
@@ -10293,7 +10255,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81377555211a3c842b5eccb46fc24775, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damagePerShot: 20
+  damagePerShot: 1
   timeBetweenBullets: 0.15
   range: 10
   faceLight: {fileID: 5127656183957814544}
@@ -10599,15 +10561,3 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 4851366911001477777}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4843077157746802724 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 28593365106639541, guid: c657d22f37c6f9d4d94e443f6cb9ea13,
-    type: 3}
-  m_PrefabInstance: {fileID: 4851366911001477777}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

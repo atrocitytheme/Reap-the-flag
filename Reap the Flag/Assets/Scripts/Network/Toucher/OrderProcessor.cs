@@ -75,7 +75,7 @@ public class OrderProcessor : MonoBehaviour
     }
 
     public void ProcessTcp(string json) {
-        Debug.LogError("tcp received!");
+        Debug.Log(json);
     }
 
     private TestModel InitPlayerModel()

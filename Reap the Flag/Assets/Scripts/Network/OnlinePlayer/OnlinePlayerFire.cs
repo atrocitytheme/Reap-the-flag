@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using PlayerComponent;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -86,7 +87,7 @@ public class OnlinePlayerFire : MonoBehaviour
             // Spot the component
             var components = shootHit.collider.GetComponents<MonoBehaviour>();
             var componentList = new List<MonoBehaviour>(components);
-            var targetMonos = componentList.Where((d) => d is Damagable).ToList();
+            var targetMonos = componentList.Where((d) => d is PlayerHealth).ToList();
 
             foreach (MonoBehaviour behavior in targetMonos)
             {

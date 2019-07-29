@@ -62,8 +62,9 @@ public class NetworkReceiver : MonoBehaviour {
     {
         if (!tcpOpen) // since it's keep-alive connection
         {
+            Debug.Log("listening pool established!");
             tcpOpen = true;
-            Task.Run(() => AsyncRead(client, tcpLength));
+            AsyncRead(client, tcpLength);
         }
     }
 
@@ -72,26 +73,34 @@ public class NetworkReceiver : MonoBehaviour {
         NetworkStream stream = client.GetStream();
         int total = 0;
         int offset = 0;
-        while (true) {
+        while (true)
+        {
             try
             {
                 var curBytes = await stream.ReadAsync(received, offset, tcpLength - total);
                 total += curBytes;
                 offset += curBytes;
-                if (total == tcpLength)
-                {
+               /* if (total > tcpLength)
+                {*/
                     QueueMainThreadWork(() =>
                     {
+                        Debug.Log("current bytes is: " + curBytes);
+                        Debug.Log("ready for commence...");
                         processor.ProcessTcp(Encoding.UTF8.GetString(received));
                     });
                     offset = 0;
                     total = 0;
-                }
+                /*}*/
             }
-            catch (Exception) {
+            catch (Exception)
+            {
                 tcpOpen = false;
                 return;
             }
         }
+    }
+
+    public void UpdateReceiver() {
+        tcpOpen = false;
     }
 }
