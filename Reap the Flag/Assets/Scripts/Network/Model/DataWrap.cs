@@ -21,14 +21,15 @@ public class DataWrap
         Vector3 newRotation = new Vector3(rt.X, rt.Y, rt.Z);
 
         gameObj.transform.eulerAngles = newRotation;
-        Debug.Log("shootingSTAR... " + model.IsShooting);
         if (model.IsShooting)
         {
             gameObj.GetComponentInChildren<OnlinePlayerFire>()?.Shoot();
         }
     }
 
-    // sync model with the gameobj
+    /// <summary>
+    /// sync model with the gameobj
+    /// </summary>
     public void SyncModel() {
         WorldPoint loc = new WorldPoint();
         WorldPoint pt = new WorldPoint();
@@ -43,6 +44,7 @@ public class DataWrap
         model.Location.Location = loc;
         model.Rotation.Rotation = pt;
         PlayerShooting shooterScript = gameObj.GetComponentInChildren<PlayerShooting>();
+        if (shooterScript != null)
         model.IsShooting = shooterScript.isShooting;
 
     }

@@ -38,7 +38,9 @@ public class MainPlayerSpawnManager : MonoBehaviour
         return curPlayer != null;
     }
 
-
+    /// <summary>
+    /// completely delete the player
+    /// </summary>
     public void DeleteCurPlayer() {
         Die();
         curPlayer = null;
@@ -47,7 +49,9 @@ public class MainPlayerSpawnManager : MonoBehaviour
     public bool IsPlayer(TestModel model) {
         return curPlayer.model.Id.Equals(model.Id);
     }
-
+    /// <summary>
+    /// destroy the reference of the player on scene
+    /// </summary>
     public void Die() {
         Destroy(curPlayer.gameObj);
     }

@@ -25,7 +25,6 @@ public class OrderProcessor : MonoBehaviour
         adjuster = facade.GetComponent<PositionAdjuster>();
     }
     public void Process(string json) {
-        Debug.Log("getting values...");
         JArray result = JArray.Parse(json.Trim());
         if (stateMachine.State == StateType.NON_INITIALIZED)
         {
@@ -65,11 +64,11 @@ public class OrderProcessor : MonoBehaviour
 
                 else if (model.CommandType == 1)
                 {
-                    DataWrap wrp = spawnManager.RetrievePlayer(model);
-                    wrp.model.Location = model.Location;
-                    wrp.model.Rotation = model.Rotation;
-                    wrp.model.IsShooting = model.IsShooting;
-                    wrp.SyncGameObject();
+                    SyncOnlinePlayers(model);
+                }
+
+                else if (model.CommandType == 10) {
+                    SyncOnlinePlayers(model);
                 }
             }
         }
@@ -109,5 +108,13 @@ public class OrderProcessor : MonoBehaviour
         newModel.IsShooting = isShooting;
 
         return newModel;
+    }
+    // sync movement of specific online player
+    private void SyncOnlinePlayers(TestModel model) {
+        DataWrap wrp = spawnManager.RetrievePlayer(model);
+        wrp.model.Location = model.Location;
+        wrp.model.Rotation = model.Rotation;
+        wrp.model.IsShooting = model.IsShooting;
+        wrp.SyncGameObject();
     }
 }

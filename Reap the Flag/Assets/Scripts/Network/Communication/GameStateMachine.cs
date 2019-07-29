@@ -9,10 +9,13 @@ using UnityEngine.UI;
 public class GameStateMachine : MonoBehaviour
 {
     public MessageClient messageClient;
+    public KetFrameClient ketFrameClient;
     private StateType state = StateType.NON_INITIALIZED;
     public PlayerSpawnManager spawnManager;
     public MainPlayerSpawnManager playerSpawnManager;
     public GameObject warningSign;
+    public ObSpawnManager obManager;
+
     public StateType State {
         get {
             return state;
@@ -56,7 +59,8 @@ public class GameStateMachine : MonoBehaviour
         if (state == StateType.PENDING)
         {
             warningSign?.SetActive(true);
-            Task.Run(()=> messageClient.Connect());
+            /*Task.Run(()=> messageClient.Connect());*/
+            Task.Run(() => ketFrameClient.Connect());
         }
         else {
             warningSign?.SetActive(false);
@@ -87,28 +91,34 @@ public class GameStateMachine : MonoBehaviour
         }
 
         if (state == StateType.KILLED) {
-            Debug.Log("asdasd");
             playerSpawnManager.Player.gameObj.GetComponent<PlayerHealth>().Death();
+            obManager.RegisterInfo(playerSpawnManager.Player.model);
             playerSpawnManager.Die();
-
             state = StateType.OB;
         }
 
         if (state == StateType.OB) {
             TestModel m = playerSpawnManager.Player.model;
-            m.CommandType = 1;
+            m.CommandType = 10;
             m.Name = newName;
             m.Password = password;
             m.Id = id;
             messageClient.AskForUpdate(m);
+
+            if (!obManager.Spawned()) {
+                obManager.Spawn();
+            }
         }
 
         CheckNetWork();
     }
 
     private void CheckNetWork() {
-        if (messageClient.TestTcpConnection())
-        messageClient.AskForKeyFrame(new TestModel { CommandType=101});
+        /*if (messageClient.TestTcpConnection())
+        messageClient.AskForKeyFrame(new TestModel { CommandType=101});*/
+        if (ketFrameClient.TestTcpConnection()) {
+            ketFrameClient.AskForKeyFrame(new TestModel { CommandType = 101 });
+        }
     }
 
     public void StopGame() {

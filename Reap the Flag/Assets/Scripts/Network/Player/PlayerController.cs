@@ -24,6 +24,9 @@ namespace PlayerComponent
 
         void FixedUpdate ()
         {
+
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
             // Store the input axes.
             float h = Input.GetAxisRaw("Horizontal");
             float v = Input.GetAxisRaw("Vertical");

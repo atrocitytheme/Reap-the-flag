@@ -226,6 +226,7 @@ GameObject:
   - component: {fileID: 624455189}
   - component: {fileID: 624455190}
   - component: {fileID: 624455191}
+  - component: {fileID: 624455188}
   m_Layer: 0
   m_Name: NetworkTesting
   m_TagString: Untagged
@@ -249,6 +250,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &624455188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 624455186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbc4d7afa59a951458b48e0cf5bed1f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ip: 10.7.8.185
+  port: 9956
+  stateMachine: {fileID: 2063132547}
 --- !u!114 &624455189
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -614,9 +630,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1648072679}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adc7d0d1fe1e4eb44bb6ca6c5ebf35cf, type: 3}
+  m_Script: {fileID: 11500000, guid: 0d491b63d2047d9458ea7084c3d0654a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OB_Prototype: {fileID: 600341332077463725, guid: 3f859498ce9a65d4f8445d72aa119735,
+    type: 3}
 --- !u!1 &2052809154
 GameObject:
   m_ObjectHideFlags: 0
@@ -740,6 +758,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   messageClient: {fileID: 624455189}
+  ketFrameClient: {fileID: 624455188}
   spawnManager: {fileID: 1648072681}
   playerSpawnManager: {fileID: 1648072680}
   warningSign: {fileID: 1128963272}
+  obManager: {fileID: 1648072683}
