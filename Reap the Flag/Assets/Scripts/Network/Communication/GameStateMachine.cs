@@ -117,7 +117,7 @@ public class GameStateMachine : MonoBehaviour
         /*if (messageClient.TestTcpConnection())
         messageClient.AskForKeyFrame(new TestModel { CommandType=101});*/
         if (ketFrameClient.TestTcpConnection()) {
-            ketFrameClient.AskForKeyFrame(new TestModel { CommandType = 101 });
+            ketFrameClient.AskForKeyFrame(new TestModel { CommandType = 101});
         }
     }
 
