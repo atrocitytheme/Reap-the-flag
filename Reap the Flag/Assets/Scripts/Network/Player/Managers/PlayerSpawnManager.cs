@@ -9,7 +9,11 @@ public class PlayerSpawnManager : MonoBehaviour
 
     public DataWrap RetrievePlayer(TestModel model) {
         if (model == null) return null;
-        if (players.ContainsKey(model.Id)) return players[model.Id];
+        return RetrievePlayer(model.Id);
+    }
+
+    public DataWrap RetrievePlayer(string id) {
+        if (players.ContainsKey(id)) return players[id];
 
         return null;
     }

@@ -14,8 +14,8 @@ public class OnlinePlayerHealth : MonoBehaviour
     public Color flashColour = new Color(1f, 0f, 0f, 0.7f);     // The colour the damageImage is set to, to flash.
     Animator anim;                                              // Reference to the Animator component.
     AudioSource playerAudio;                                    // Reference to the AudioSource component.
-    PlayerController playerMovement;                              // Reference to the player's movement.
-    PlayerShooting playerShooting;
+    OnlinePlayerController playerMovement;                              // Reference to the player's movement.
+    OnlinePlayerFire playerShooting;
     GameStateMachine stateMachine;
     public ParticleSystem particleHits;
 
@@ -28,8 +28,8 @@ public class OnlinePlayerHealth : MonoBehaviour
         // Setting up the references.
         anim = GetComponent<Animator>();
         playerAudio = GetComponent<AudioSource>();
-        playerMovement = GetComponent<PlayerController>();
-        playerShooting = GetComponentInChildren<PlayerShooting>();
+        playerMovement = GetComponent<OnlinePlayerController>();
+        playerShooting = GetComponentInChildren<OnlinePlayerFire>();
         // Set the initial health of the player.
         currentHealth = startingHealth;
         stateMachine = GameObject.Find("/NetworkTesting/Communicator").GetComponent<GameStateMachine>();
@@ -66,7 +66,7 @@ public class OnlinePlayerHealth : MonoBehaviour
     }
 
 
-    void Death()
+    public void Death()
     {
         // Set the death flag so this function won't be called again.
         isDead = true;

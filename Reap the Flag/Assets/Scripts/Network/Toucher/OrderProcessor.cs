@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -75,7 +76,21 @@ public class OrderProcessor : MonoBehaviour
     }
 
     public void ProcessTcp(string json) {
-        Debug.Log(json);
+        JObject frame = JObject.Parse(json);
+        var commandType = frame["CommandType"].ToObject<int>();
+        var target = frame["Target"].ToObject<string>();
+        if (commandType == 6) {
+            var player = spawnManager.RetrievePlayer(target);
+
+            if (player != null) {
+                player.gameObj.GetComponent<OnlinePlayerHealth>().Death();
+                StartCoroutine(LaterAction(()=> {
+                    Debug.Log("player dead!");
+                    spawnManager.DeletePlayer(target);
+                }));
+            }
+        }
+       
     }
 
     private TestModel InitPlayerModel()
@@ -116,5 +131,12 @@ public class OrderProcessor : MonoBehaviour
         wrp.model.Rotation = model.Rotation;
         wrp.model.IsShooting = model.IsShooting;
         wrp.SyncGameObject();
+    }
+
+    private IEnumerator LaterAction(Action act) {
+
+        yield return new WaitForSeconds(3);
+
+        act();
     }
 }

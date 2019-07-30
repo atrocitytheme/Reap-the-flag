@@ -69,28 +69,50 @@ public class NetworkReceiver : MonoBehaviour {
     }
 
     private async Task AsyncRead(TcpClient client, int tcpLength) {
-        Byte[] received = new byte[tcpLength];
+        Byte[] received = new byte[200];
         NetworkStream stream = client.GetStream();
         int total = 0;
         int offset = 0;
+        int length = int.MaxValue;
+        bool lengthSet = false;
         while (true)
         {
             try
             {
-                var curBytes = await stream.ReadAsync(received, offset, tcpLength - total);
+                int dataToRead = lengthSet ? length + 4 - total : 4;
+                var curBytes = await stream.ReadAsync(received, total, dataToRead);
                 total += curBytes;
-                offset += curBytes;
-               /* if (total > tcpLength)
-                {*/
-                    QueueMainThreadWork(() =>
+
+                if (!lengthSet)
+                {
+                    if (total >= 4)
                     {
-                        Debug.Log("current bytes is: " + curBytes);
-                        Debug.Log("ready for commence...");
-                        processor.ProcessTcp(Encoding.UTF8.GetString(received));
-                    });
-                    offset = 0;
-                    total = 0;
-                /*}*/
+                        Byte[] arr = new byte[4];
+                        Array.Copy(received, 0, arr, 0, 4);
+                        length = BitConverter.ToInt32(arr, 0);
+                        lengthSet = true;
+                        QueueMainThreadWork(() =>
+                        {
+                            Debug.Log("length is " + length);
+                        });
+                    }
+                }
+                else {
+                    if (total - 4 >= length) {
+                        Byte[] newArr = new byte[length];
+                        Array.Copy(received, 4, newArr, 0, length);
+                        QueueMainThreadWork(() =>
+                        {
+                            Debug.Log("content: ..." + Encoding.UTF8.GetString(newArr));
+                            processor.ProcessTcp(Encoding.UTF8.GetString(newArr));
+                        });
+                        lengthSet = false;
+                        offset = 0;
+                        total = 0;
+                        length = int.MaxValue;
+                        received = new byte[200];
+                    }
+                }
             }
             catch (Exception)
             {
