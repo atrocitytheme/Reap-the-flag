@@ -5285,6 +5285,7 @@ MonoBehaviour:
   damagePerShot: 5
   timeBetweenBullets: 0.12
   range: 10
+  isShooting: 0
   faceLight: {fileID: 1584191516724503627}
 --- !u!108 &1584191516724503625
 Light:
@@ -5435,14 +5436,14 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1584191516717902191}
   serializedVersion: 2
-  m_Mass: 1
-  m_Drag: Infinity
+  m_Mass: 2
+  m_Drag: 1
   m_AngularDrag: Infinity
   m_UseGravity: 1
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 116
-  m_CollisionDetection: 0
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 112
+  m_CollisionDetection: 2
 --- !u!114 &1584191516723911819
 MonoBehaviour:
   m_ObjectHideFlags: 0

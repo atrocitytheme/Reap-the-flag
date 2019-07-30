@@ -683,6 +683,31 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7743352830634327167, guid: 72bab330058037845b227279222ffb84,
+        type: 3}
+      propertyPath: m_Mass
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7743352830634327167, guid: 72bab330058037845b227279222ffb84,
+        type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7743352830634327167, guid: 72bab330058037845b227279222ffb84,
+        type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7743352830634327167, guid: 72bab330058037845b227279222ffb84,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 112
+      objectReference: {fileID: 0}
+    - target: {fileID: 7743352830634327167, guid: 72bab330058037845b227279222ffb84,
+        type: 3}
+      propertyPath: m_Drag
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7743352830635207419, guid: 72bab330058037845b227279222ffb84,
         type: 3}
       propertyPath: healthSlider

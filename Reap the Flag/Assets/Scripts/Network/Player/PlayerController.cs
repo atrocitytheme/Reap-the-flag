@@ -14,6 +14,8 @@ namespace PlayerComponent
 
         float h = 0; // the rotation direction of mouse x
         float v = 0; // the rotation direction of mouse y
+
+        int jumpTimeout = 0;
         void Awake ()
         {
             anim = GetComponent <Animator> ();
@@ -34,14 +36,17 @@ namespace PlayerComponent
             // Move the player around the scene.
             Move (h, v);
 
-            // Turn the player to face the mouse cursor.
-            /*            if (timer.IsValid)
-            */
-
             Turning ();
 
             // Animate the player.
             Animating (h, v);
+
+            if (Input.GetKeyDown(KeyCode.Space)) {
+                if (jumpTimeout <= 0)
+                Jump();
+            }
+
+            jumpTimeout -= 1;
         }
 
 
@@ -70,6 +75,11 @@ namespace PlayerComponent
             v += Input.GetAxis("Mouse Y");
             transform.eulerAngles = (new Vector3(-v, h, 0) * rotateSmooth);
             
+        }
+
+        void Jump() {
+            transform.Translate(Vector3.up * 100 * Time.deltaTime, Space.World);
+            jumpTimeout = 40;
         }
 
         public void Turning(float h, float v) {
