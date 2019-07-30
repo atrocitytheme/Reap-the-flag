@@ -135,8 +135,7 @@ public class OrderProcessor : MonoBehaviour
 
     private IEnumerator LaterAction(Action act) {
 
-        yield return new WaitForSeconds(3);
-
+        yield return new WaitForSeconds(10);
         act();
     }
 }
