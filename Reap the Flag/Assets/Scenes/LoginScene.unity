@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.07190951, g: 0.19834094, b: 0.35731858, a: 1}
+  m_IndirectSpecularColor: {r: 0.071920775, g: 0.19843069, b: 0.3572273, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -311,7 +311,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!45 &330802710
 Skybox:
@@ -331,7 +331,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100000, guid: 03fd20087355b0842978b747dd4c0849, type: 3}
       propertyPath: m_Name
-      value: FlagPole (1)
+      value: Flag1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 03fd20087355b0842978b747dd4c0849, type: 3}
       propertyPath: m_LocalPosition.x
@@ -363,7 +363,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 03fd20087355b0842978b747dd4c0849, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 03fd20087355b0842978b747dd4c0849, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -5398,7 +5398,7 @@ Transform:
   - {fileID: 310134634}
   - {fileID: 147559934}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &837720817
 GameObject:
@@ -5581,12 +5581,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 936531179}
-  m_LocalRotation: {x: 0.113154076, y: -0.0059455447, z: -0.00061828695, w: -0.9935595}
-  m_LocalPosition: {x: -19.338905, y: -27.56684, z: 14.362146}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -21.060001, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1180747882
 PrefabInstance:
@@ -5910,7 +5910,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100000, guid: 03fd20087355b0842978b747dd4c0849, type: 3}
       propertyPath: m_Name
-      value: FlagPole
+      value: Flag2
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 03fd20087355b0842978b747dd4c0849, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6026,7 +6026,7 @@ PrefabInstance:
     - target: {fileID: 1282877851224377072, guid: ddb05baf89b5d0341b47e480bf1e3706,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1282877851224377072, guid: ddb05baf89b5d0341b47e480bf1e3706,
         type: 3}

@@ -11,5 +11,6 @@ public enum StateType
     DAMAGED, // state when damaged
     KILLED, // state when killed
     PENDING,
-    OB
+    OB,
+    EXIT
 }

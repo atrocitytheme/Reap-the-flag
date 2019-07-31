@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameStateMachine : MonoBehaviour
@@ -20,6 +21,10 @@ public class GameStateMachine : MonoBehaviour
     public StateType State {
         get {
             return state;
+        }
+
+        set {
+            state = value;
         }
     }
 
@@ -105,12 +110,20 @@ public class GameStateMachine : MonoBehaviour
             m.Name = newName;
             m.Password = password;
             m.Id = id;
-            messageClient.AskForUpdate(m);
+            messageClient.AskForUpdate(m); // get the other people's position
 
             if (!obManager.Spawned()) {
                 obManager.Spawn();
             }
         }
+
+        if (state == StateType.EXIT) {
+            TestModel m = new TestModel { CommandType = 11, Name = newName, Password = password, Id = id };
+            ketFrameClient.AskForKeyFrame(m);
+            state = StateType.IDLE;
+            SceneManager.LoadScene("LoginScene");
+        }
+
         if (networkTimeout <= 0)
         {
             CheckNetWork();
