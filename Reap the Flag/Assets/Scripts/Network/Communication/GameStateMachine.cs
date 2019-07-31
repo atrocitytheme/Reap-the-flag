@@ -114,7 +114,7 @@ public class GameStateMachine : MonoBehaviour
         if (networkTimeout <= 0)
         {
             CheckNetWork();
-            networkTimeout = 100;
+            networkTimeout = 6000;
         }
         networkTimeout -= 1;
     }
