@@ -16,6 +16,7 @@ namespace PlayerComponent
         float v = 0; // the rotation direction of mouse y
 
         int jumpTimeout = 0;
+        bool isJumping = false;
         void Awake ()
         {
             anim = GetComponent <Animator> ();
@@ -78,8 +79,12 @@ namespace PlayerComponent
         }
 
         void Jump() {
-            transform.Translate(Vector3.up * 100 * Time.deltaTime, Space.World);
-            jumpTimeout = 40;
+            /*            transform.Translate(Vector3.up * 80 * Time.deltaTime, Space.World);
+             *            
+            */
+            playerRigidbody.AddForce(new Vector3(0, 500, 0));
+            jumpTimeout = 45;
+
         }
 
         public void Turning(float h, float v) {

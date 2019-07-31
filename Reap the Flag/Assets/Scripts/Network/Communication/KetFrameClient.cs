@@ -54,12 +54,14 @@ public class KetFrameClient : MonoBehaviour
     public void SendKeyFrame(string dataSent, TcpClient client)
     {
         Byte[] data = Encoding.UTF8.GetBytes(dataSent);
+       
         NetworkStream stream = client.GetStream();
+
         if (stream.CanWrite)
         {
             stream.WriteAsync(data, 0, data.Length);
             receiver.ProcessTcpMessage(client, 5);
-        }
+        }        
     }
 
     private void Update()

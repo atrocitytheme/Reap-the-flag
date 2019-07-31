@@ -17,7 +17,7 @@ public class GameStateMachine : MonoBehaviour
     public GameObject warningSign;
     public ObSpawnManager obManager;
 
-    int networkTimeout = 0;
+    int networkTimeout = -1;
     public StateType State {
         get {
             return state;
@@ -126,18 +126,24 @@ public class GameStateMachine : MonoBehaviour
 
         if (networkTimeout <= 0)
         {
-            CheckNetWork();
+            bool isSucceed = CheckNetWork();
+            if (isSucceed)
             networkTimeout = 6000;
         }
         networkTimeout -= 1;
     }
-
-    private void CheckNetWork() {
+    private void CheckNetWork(int times) {
+        for (int i = 0; i < times; i++) {
+            CheckNetWork();
+        }
+    }
+    private bool CheckNetWork() {
         /*if (messageClient.TestTcpConnection())
         messageClient.AskForKeyFrame(new TestModel { CommandType=101});*/
-        if (ketFrameClient.TestTcpConnection()) {
-            ketFrameClient.AskForKeyFrame(new TestModel { CommandType = 101, Id=id, Name = newName, Password=password});
-        }
+        bool r = ketFrameClient.TestTcpConnection();
+        if (r)
+        ketFrameClient.AskForKeyFrame(new TestModel { CommandType = 101, Id=id, Name = newName, Password=password, RoomId=1});
+        return r;
     }
 
     public void StopGame() {

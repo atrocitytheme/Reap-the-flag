@@ -76,6 +76,7 @@ public class OrderProcessor : MonoBehaviour
     }
 
     public void ProcessTcp(string json) {
+        Debug.Log(json);
         JObject frame = JObject.Parse(json);
         var commandType = frame["CommandType"].ToObject<int>();
         var target = frame["Target"].ToObject<string>();
@@ -88,6 +89,13 @@ public class OrderProcessor : MonoBehaviour
                     Debug.Log("player dead!");
                     spawnManager.DeletePlayer(target);
                 }));
+            }
+        }
+
+        if (commandType == 11) {
+            var player = spawnManager.RetrievePlayer(target);
+            if (player != null) {
+                spawnManager.DeletePlayer(target);
             }
         }
        
