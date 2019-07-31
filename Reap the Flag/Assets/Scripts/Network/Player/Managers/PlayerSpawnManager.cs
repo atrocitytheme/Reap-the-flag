@@ -20,12 +20,15 @@ public class PlayerSpawnManager : MonoBehaviour
 
     public void SpawnPlayer(TestModel md)
     {
-        WorldPoint pt = md.Location.Location;
-        WorldPoint rt = md.Rotation.Rotation;
-        Vector3 spin = new Vector3((float)rt.X, (float)rt.Y, (float)rt.Z);
-        GameObject obj = Instantiate(player, new Vector3((float)pt.X, (float)pt.Y, (float)pt.Z), Quaternion.Euler(spin));
-        players.Add(md.Id, new DataWrap { gameObj = obj, model = md});
-        obj.transform.position = new Vector3(100, 100, 100);
+        if (!md.IsDead)
+        {
+            WorldPoint pt = md.Location.Location;
+            WorldPoint rt = md.Rotation.Rotation;
+            Vector3 spin = new Vector3((float)rt.X, (float)rt.Y, (float)rt.Z);
+            GameObject obj = Instantiate(player, new Vector3((float)pt.X, (float)pt.Y, (float)pt.Z), Quaternion.Euler(spin));
+            players.Add(md.Id, new DataWrap { gameObj = obj, model = md });
+            obj.transform.position = new Vector3(100, 100, 100);
+        }
     }
 
     public void DeletePlayer(string id) {

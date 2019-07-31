@@ -110,6 +110,7 @@ public class OrderProcessor : MonoBehaviour
         var lo = obj["Location"].ToObject<WorldLocation>();
         var commandType = obj["CommandType"].ToObject<int>();
         var isShooting = obj["IsShooting"].ToObject<bool>();
+        var isDead = obj["IsDead"].ToObject<bool>();
         var rr = new WorldRotation();
 
         rr.Rotation = obj["Rotation"].ToObject<WorldPoint>();
@@ -121,12 +122,14 @@ public class OrderProcessor : MonoBehaviour
         newModel.Rotation = rr;
         newModel.Location = lo;
         newModel.IsShooting = isShooting;
+        newModel.IsDead = isDead;
 
         return newModel;
     }
     // sync movement of specific online player
     private void SyncOnlinePlayers(TestModel model) {
         DataWrap wrp = spawnManager.RetrievePlayer(model);
+        if (wrp == null) return;
         wrp.model.Location = model.Location;
         wrp.model.Rotation = model.Rotation;
         wrp.model.IsShooting = model.IsShooting;

@@ -20,6 +20,9 @@ namespace PlayerComponent
         PlayerController playerMovement;                              // Reference to the player's movement.
         PlayerShooting playerShooting;
         GameStateMachine stateMachine;
+
+
+
         public ParticleSystem particleHits;
 
         bool isDead;                                                // Whether the player is dead.
@@ -121,6 +124,10 @@ namespace PlayerComponent
 
         public bool IsDead() {
             return currentHealth <= 0;
+        }
+
+        public void TakeDamage(int amount, Vector3 hitPoint, string id) {
+
         }
     }
 }

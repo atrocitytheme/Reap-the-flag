@@ -15,6 +15,7 @@ public class TestModel
     private string password;
     private string name;
     private bool isShooting;
+    private bool isDead;
 
     private WorldLocation location;
     private WorldRotation rotation;
@@ -123,6 +124,16 @@ public class TestModel
 
         set {
             isShooting = value;
+        }
+    }
+
+    public bool IsDead {
+        get {
+            return isDead;
+        }
+
+        set {
+            isDead = value;
         }
     }
 }
