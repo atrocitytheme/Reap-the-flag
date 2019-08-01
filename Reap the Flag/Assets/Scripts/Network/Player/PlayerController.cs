@@ -27,6 +27,14 @@ namespace PlayerComponent
 
         void FixedUpdate ()
         {
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                speed = 9f;
+            }
+
+            else {
+                speed = 6f;
+            }
 
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
