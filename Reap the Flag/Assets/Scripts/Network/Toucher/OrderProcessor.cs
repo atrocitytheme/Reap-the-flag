@@ -8,6 +8,7 @@ public class OrderProcessor : MonoBehaviour
 {
     public GameObject facade;
     public GameStateMachine starter;
+    public AchievementBoardRequester achievementRequester;
     private MessageClient messageClient;
     private GameStateMachine stateMachine;
     public Dictionary<int, GameObject> handlers;
@@ -98,7 +99,21 @@ public class OrderProcessor : MonoBehaviour
                 spawnManager.DeletePlayer(target);
             }
         }
-       
+        // process achievement
+        if (commandType == 7) {
+            if (achievementRequester != null) {
+                var roomData = frame["RoomData"];
+                foreach (var entry in (JObject) roomData) {
+                    JToken token = entry.Value;
+                    int numKill = token.ToObject<int>();
+                    achievementRequester.AddData(entry.Key, numKill);
+                }
+                Debug.Log("achivement board filled!");
+                achievementRequester.InjectValue();
+
+            }
+        }
+        
     }
 
     private TestModel InitPlayerModel()

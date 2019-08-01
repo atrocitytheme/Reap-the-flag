@@ -26,6 +26,7 @@ public class PlayerSpawnManager : MonoBehaviour
             WorldPoint rt = md.Rotation.Rotation;
             Vector3 spin = new Vector3((float)rt.X, (float)rt.Y, (float)rt.Z);
             GameObject obj = Instantiate(player, new Vector3((float)pt.X, (float)pt.Y, (float)pt.Z), Quaternion.Euler(spin));
+            obj.GetComponent<OnlineIdentity>().RegisterIdentity(md);
             players.Add(md.Id, new DataWrap { gameObj = obj, model = md });
             obj.transform.position = new Vector3(100, 100, 100);
         }

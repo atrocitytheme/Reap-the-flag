@@ -2,9 +2,9 @@
 using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.SceneManagement;
-
 namespace PlayerComponent
 {
+    [RequireComponent(typeof(Player))]
     public class PlayerHealth : MonoBehaviour, Damagable
     {
         public int startingHealth = 100;                            // The amount of health the player starts the game with.
@@ -20,7 +20,7 @@ namespace PlayerComponent
         PlayerController playerMovement;                              // Reference to the player's movement.
         PlayerShooting playerShooting;
         GameStateMachine stateMachine;
-
+        Player playerIdentity;
 
 
         public ParticleSystem particleHits;
@@ -39,6 +39,7 @@ namespace PlayerComponent
             // Set the initial health of the player.
             currentHealth = startingHealth;
             stateMachine = GameObject.Find("/NetworkTesting/Communicator").GetComponent<GameStateMachine>();
+            playerIdentity = GetComponent<Player>();
         }
 
         private void Start()
@@ -93,6 +94,7 @@ namespace PlayerComponent
 
         public void Death ()
         {
+            playerIdentity.SetLockState(true); // lock the data recorder of the player
             // Set the death flag so this function won't be called again.
             isDead = true;
 
@@ -126,8 +128,9 @@ namespace PlayerComponent
             return currentHealth <= 0;
         }
 
-        public void TakeDamage(int amount, Vector3 hitPoint, string id) {
-
+        public void TakeDamage(int amount, Vector3 hitPoint, TestModel otherPlayer) {
+            playerIdentity.DamagedBy(otherPlayer);
+            TakeDamage(amount, hitPoint);
         }
     }
 }

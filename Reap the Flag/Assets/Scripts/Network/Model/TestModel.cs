@@ -16,6 +16,7 @@ public class TestModel
     private string name;
     private bool isShooting;
     private bool isDead;
+    private string eventTrigger;
 
     private WorldLocation location;
     private WorldRotation rotation;
@@ -134,6 +135,16 @@ public class TestModel
 
         set {
             isDead = value;
+        }
+    }
+
+    public string EventTrigger {
+        get {
+            return eventTrigger;
+        }
+
+        set {
+            eventTrigger = value;
         }
     }
 }

@@ -29,4 +29,8 @@ public class HitGroundManager : MonoBehaviour, Damagable
     public bool IsDead() {
         return false;
     }
+
+    public void TakeDamage(int amount, Vector3 hitPoint, TestModel model) {
+        TakeDamage(amount, hitPoint);
+    }
 }

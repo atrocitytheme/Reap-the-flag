@@ -97,11 +97,14 @@ public class GameStateMachine : MonoBehaviour
         }
 
         if (state == StateType.KILLED) {
-            playerSpawnManager.Player.gameObj.GetComponent<PlayerHealth>().Death();
+            GameObject playerEntity = playerSpawnManager.Player.gameObj;
+            playerEntity.GetComponent<PlayerHealth>().Death();
+            TestModel damageDealer = playerEntity.GetComponent<Player>().GetLast();
             obManager.RegisterInfo(playerSpawnManager.Player.model);
             playerSpawnManager.Die();
             state = StateType.OB;
-            ketFrameClient.AskForKeyFrame(new TestModel { CommandType=6, Name=newName, Password=password, Id=id});
+            ketFrameClient.AskForKeyFrame(new TestModel { CommandType=6, Name=newName, Password=password, Id=id, EventTrigger=damageDealer.Id});
+            Debug.Log("player was killed by: " + damageDealer.Id);
         }
 
         if (state == StateType.OB) {

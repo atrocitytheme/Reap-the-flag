@@ -70,6 +70,10 @@ namespace PlayerComponent
             }
         }
 
+        public void TakeDamage(int amount, Vector3 hitPoint, TestModel model) {
+            TakeDamage(amount, hitPoint);
+        } 
+
 
         void Death ()
         {

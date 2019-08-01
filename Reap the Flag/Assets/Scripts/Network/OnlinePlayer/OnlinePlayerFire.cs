@@ -10,6 +10,7 @@ public class OnlinePlayerFire : MonoBehaviour
     public int damagePerShot = 20;                  // The damage inflicted by each bullet.
     public float timeBetweenBullets = 0.15f;        // The time between each shot.
     public float range = 10f;                      // The distance the gun can fire.
+    public OnlineIdentity identity;
 
     float timer;                                    // A timer to determine when to fire.
     Ray shootRay = new Ray();                       // A ray from the gun end forwards.
@@ -94,7 +95,7 @@ public class OnlinePlayerFire : MonoBehaviour
                 var target = (Damagable)behavior;
                 if (!target.IsDead())
                 {
-                    target.TakeDamage(damagePerShot, shootHit.point);
+                    target.TakeDamage(damagePerShot, shootHit.point, identity.GetIdentity());
                 }
             }
             gunLine.SetPosition(1, shootHit.point);
