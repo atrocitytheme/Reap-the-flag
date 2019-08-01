@@ -65,6 +65,7 @@ namespace PlayerComponent
             movement = movement.normalized * speed * Time.deltaTime;
 
             // Move the player to it's current position plus the movement.
+            
             playerRigidbody.MovePosition(transform.position + movement);
         }
 

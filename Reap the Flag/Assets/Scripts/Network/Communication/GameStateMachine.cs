@@ -124,7 +124,10 @@ public class GameStateMachine : MonoBehaviour
             TestModel m = new TestModel { CommandType = 11, Name = newName, Password = password, Id = id };
             ketFrameClient.AskForKeyFrame(m);
             state = StateType.IDLE;
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
             SceneManager.LoadScene("LoginScene");
+            
         }
 
         if (networkTimeout <= 0)
