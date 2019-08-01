@@ -60,5 +60,6 @@ public class AchievementBoardRequester : MonoBehaviour
         }
         Debug.Log(curString);
         displayBoard.GetComponent<DataBoard>().InjectValue(curString);
+        data.Clear();
     }
 }
