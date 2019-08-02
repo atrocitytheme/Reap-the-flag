@@ -13,6 +13,7 @@ public class NetworkReceiver : MonoBehaviour {
     private static readonly Queue<Action> tasks = new Queue<Action>();
     private OrderProcessor processor;
     private bool tcpOpen = false;
+    private bool udpOpen = false;
 
     private void Awake()
     {
@@ -38,13 +39,15 @@ public class NetworkReceiver : MonoBehaviour {
     }
 
     public void ProcessMessage(UdpClient curClient) {
+        
         curClient.BeginReceive(new AsyncCallback(recv(curClient)), curClient);
+        udpOpen = true;   
     }
 
     private Action<IAsyncResult> recv(UdpClient client) {
 
         return (IAsyncResult res) => {
-            IPEndPoint remotePoint = new IPEndPoint(IPAddress.Any, 9956);
+            IPEndPoint remotePoint = new IPEndPoint(IPAddress.Any, 0);
             Byte[] received = client.EndReceive(res, ref remotePoint);
             QueueMainThreadWork(() => {
                 processor.Process(Encoding.UTF8.GetString(received));
@@ -64,7 +67,7 @@ public class NetworkReceiver : MonoBehaviour {
         {
             Debug.Log("listening pool established!");
             tcpOpen = true;
-            AsyncRead(client, tcpLength);
+            Task.Run(()=> AsyncRead(client, tcpLength));
         }
     }
 

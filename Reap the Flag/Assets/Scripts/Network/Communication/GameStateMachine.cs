@@ -16,7 +16,7 @@ public class GameStateMachine : MonoBehaviour
     public MainPlayerSpawnManager playerSpawnManager;
     public GameObject warningSign;
     public ObSpawnManager obManager;
-
+    bool tcpSpawnSent = false;
     int networkTimeout = -1;
     public StateType State {
         get {
@@ -76,10 +76,8 @@ public class GameStateMachine : MonoBehaviour
             warningSign?.SetActive(true);
             TestModel generationCommand = ConfigureBasicModel();
             generationCommand.CommandType = 0;
-          
+            generationCommand.RoomId = 1; // temporary TODO: fixd it later
             messageClient.AskForUpdate(generationCommand);
-            
-            
         }
 
         if (state == StateType.INITIALIZED) {
@@ -144,8 +142,6 @@ public class GameStateMachine : MonoBehaviour
         }
     }
     private bool CheckNetWork() {
-        /*if (messageClient.TestTcpConnection())
-        messageClient.AskForKeyFrame(new TestModel { CommandType=101});*/
         bool r = ketFrameClient.TestTcpConnection();
         if (r)
         ketFrameClient.AskForKeyFrame(new TestModel { CommandType = 101, Id=id, Name = newName, Password=password, RoomId=1});

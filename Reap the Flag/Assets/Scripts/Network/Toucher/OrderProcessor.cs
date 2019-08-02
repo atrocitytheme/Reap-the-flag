@@ -27,6 +27,8 @@ public class OrderProcessor : MonoBehaviour
         adjuster = facade.GetComponent<PositionAdjuster>();
     }
     public void Process(string json) {
+        Debug.Log(json);
+
         JArray result = JArray.Parse(json.Trim());
         if (stateMachine.State == StateType.NON_INITIALIZED)
         {
@@ -113,7 +115,6 @@ public class OrderProcessor : MonoBehaviour
 
             }
         }
-        
     }
 
     private TestModel InitPlayerModel()

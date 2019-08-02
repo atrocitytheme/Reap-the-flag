@@ -6,6 +6,7 @@ public class MainPlayerSpawnManager : MonoBehaviour
     private string id = "null";
     private DataWrap curPlayer;
     public GameObject player;
+    public GameObject naturalOb;
     public string Id {
         get {
             return id;
@@ -29,6 +30,7 @@ public class MainPlayerSpawnManager : MonoBehaviour
     }
 
     public void SpawnPlayer(TestModel md) {
+        naturalOb.SetActive(false);
         GameObject obj = Instantiate(player, Vector3.zero, Quaternion.identity);
         curPlayer = new DataWrap { gameObj = obj, model = md };
         this.id = curPlayer.model.Id;

@@ -18,36 +18,17 @@ public class MessageClient : MonoBehaviour
     TcpClient tcpClient = new TcpClient();
     NetworkReceiver receiver;
     private IPEndPoint remoteEP;
-    private void Awake()
-    {
-        receiver = GetComponent<NetworkReceiver>();
-        remoteEP = new IPEndPoint(IPAddress.Parse(ip), 9956);
-        tcpClient.ReceiveTimeout = 5000;
-    }
 
     private void Start()
     {
+        receiver = GetComponent<NetworkReceiver>();
+        remoteEP = new IPEndPoint(IPAddress.Parse(ip), 9956);
+        tcpClient.ReceiveTimeout = 50000;
+        udpClient.Client.ReceiveTimeout = 50000;
         udpClient = new UdpClient();
-/*        tcpClient = new TcpClient();
-*/    }
+    }
 
-    /*public async Task Connect() {
-        Debug.Log("connecting......");
-        if (connecting) return;
-        connecting = true;
-        Debug.Log("proceeding connection...");
-        await tcpClient.ConnectAsync(ip, port);
-        receiver.QueueMainThreadWork(() =>
-        {
-            if (tcpClient.Connected)
-            {
-                Debug.Log("Tcp connected!");
-                stateMachine?.FinishConnect();
-            }
-            connecting = false;
-        });
-
-    }*/
+   
 
     public void AskForUpdate(TestModel modelMessage) {
         SendData(JsonConvert.SerializeObject(modelMessage), udpClient);
@@ -59,30 +40,9 @@ public class MessageClient : MonoBehaviour
         receiver.ProcessMessage(cli);
     }
 
-   /* public void AskForKeyFrame(TestModel modelMessage) {
-        SendKeyFrame(JsonConvert.SerializeObject(modelMessage), tcpClient);
-    }*/
-
-   /* public void SendKeyFrame(string dataSent, TcpClient client) {
-        Byte[] data = Encoding.UTF8.GetBytes(dataSent);
-        NetworkStream stream = client.GetStream();
-        if (stream.CanWrite) {
-            stream.WriteAsync(data, 0, data.Length);
-            receiver.ProcessTcpMessage(client, data.Length);
-        }
-    }*/
 
     private void OnDestroy()
     {
         udpClient.Close();
     }
-
-    /*public bool TestTcpConnection(TcpClient client) {
-        if (client == null) return false;
-        return client.Connected;
-    }*/
-
-    /*public bool TestTcpConnection() {
-        return TestTcpConnection(tcpClient);
-    }*/
 }
