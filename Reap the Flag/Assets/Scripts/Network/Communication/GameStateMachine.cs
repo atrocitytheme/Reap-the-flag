@@ -142,6 +142,8 @@ public class GameStateMachine : MonoBehaviour
         }
     }
     private bool CheckNetWork() {
+        /*if (messageClient.TestTcpConnection())
+        messageClient.AskForKeyFrame(new TestModel { CommandType=101});*/
         bool r = ketFrameClient.TestTcpConnection();
         if (r)
         ketFrameClient.AskForKeyFrame(new TestModel { CommandType = 101, Id=id, Name = newName, Password=password, RoomId=1});
