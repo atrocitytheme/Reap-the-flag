@@ -31,6 +31,7 @@ public class GameStateMachine : MonoBehaviour
     private string id;
     private string newName;
     private string password;
+    private int roomId;
 
 
 
@@ -62,6 +63,7 @@ public class GameStateMachine : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        roomId = PlayerPrefs.GetInt("roomId");
         if (state == StateType.PENDING)
         {
             warningSign?.SetActive(true);
@@ -76,7 +78,7 @@ public class GameStateMachine : MonoBehaviour
             warningSign?.SetActive(true);
             TestModel generationCommand = ConfigureBasicModel();
             generationCommand.CommandType = 0;
-            generationCommand.RoomId = 1; // temporary TODO: fixd it later
+            generationCommand.RoomId = roomId; // temporary TODO: fixd it later
             messageClient.AskForUpdate(generationCommand);
         }
 
@@ -146,7 +148,7 @@ public class GameStateMachine : MonoBehaviour
         messageClient.AskForKeyFrame(new TestModel { CommandType=101});*/
         bool r = ketFrameClient.TestTcpConnection();
         if (r)
-        ketFrameClient.AskForKeyFrame(new TestModel { CommandType = 101, Id=id, Name = newName, Password=password, RoomId=1});
+        ketFrameClient.AskForKeyFrame(new TestModel { CommandType = 101, Id=id, Name = newName, Password=password, RoomId=roomId});
         return r;
     }
 

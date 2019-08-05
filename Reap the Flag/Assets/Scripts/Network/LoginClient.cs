@@ -90,12 +90,15 @@ public class LoginClient : MonoBehaviour
         }
 
         QueueOnMainThread(() => {
+            Debug.Log("room id received: ..." + Int32.Parse(phrase));
+            PlayerPrefs.SetInt("roomId", Int32.Parse(phrase));
             PlayerPrefs.SetString("newName", input_name);
             PlayerPrefs.SetString("password", input_password);
             PlayerPrefs.SetString("id", input_id);
             panel.DisplayInfo("loading scene...");
             try
             {
+                
                 SceneManager.LoadScene("GameScene_1");
             }
             catch (Exception e) {
