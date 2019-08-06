@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class OrderProcessor : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class OrderProcessor : MonoBehaviour
     private MainPlayerSpawnManager playerSpawnManager;
     private PlayerSpawnManager spawnManager;
     private PositionAdjuster adjuster;
+    public GameObject gameOverSign;
     private void Awake()
     {
         messageClient = GetComponent<MessageClient>();
@@ -27,8 +29,8 @@ public class OrderProcessor : MonoBehaviour
         adjuster = facade.GetComponent<PositionAdjuster>();
     }
     public void Process(string json) {
-        Debug.Log(json);
-
+/*        Debug.Log(json);
+*/
         JArray result = JArray.Parse(json.Trim());
         if (stateMachine.State == StateType.NON_INITIALIZED)
         {
@@ -79,8 +81,8 @@ public class OrderProcessor : MonoBehaviour
     }
 
     public void ProcessTcp(string json) {
-        Debug.Log(json);
-        JObject frame = JObject.Parse(json);
+/*        Debug.Log(json);
+*/        JObject frame = JObject.Parse(json);
         var commandType = frame["CommandType"].ToObject<int>();
         var target = frame["Target"].ToObject<string>();
         if (commandType == 6) {
@@ -112,8 +114,18 @@ public class OrderProcessor : MonoBehaviour
                 }
                 Debug.Log("achivement board filled!");
                 achievementRequester.InjectValue();
-
             }
+        }
+
+        if (commandType == 2) {
+            Debug.Log("quit!");
+            gameOverSign?.SetActive(true);
+            StartCoroutine(LeaveGame());
+        }
+
+        if (commandType == 3) {
+            int timeout = frame["TimeLeft"].ToObject<int>();
+            playerSpawnManager.Player.gameObj.GetComponent<TimerScript>().SetTimer(timeout);
         }
     }
 
@@ -164,5 +176,10 @@ public class OrderProcessor : MonoBehaviour
 
         yield return new WaitForSeconds(10);
         act();
+    }
+
+    public IEnumerator LeaveGame() {
+        yield return new WaitForSeconds(3);
+        SceneManager.LoadScene("LoginScene");
     }
 }
