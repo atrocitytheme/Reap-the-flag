@@ -66,6 +66,7 @@ namespace PlayerComponent
                     ammo--;
                 }
                 if (ammo <= 0 && !reloading) {
+                    isShooting = false;
                     Reload();
                     StartCoroutine(FinishReload());
                 }
@@ -99,7 +100,13 @@ namespace PlayerComponent
 
         void Shoot ()
         {
-            isShooting = true;
+            if (!reloading)
+            {
+                isShooting = true;
+            }
+            else {
+                isShooting = false;
+            }
             timer = 0f;
             gunAudio.Play ();
             // enable visual effects
