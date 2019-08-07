@@ -16,7 +16,6 @@ namespace PlayerComponent
         float v = 0; // the rotation direction of mouse y
 
         int jumpTimeout = 0;
-        bool isJumping = false;
         void Awake ()
         {
             anim = GetComponent <Animator> ();

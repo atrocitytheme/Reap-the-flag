@@ -19,7 +19,7 @@ public class LoginClient : MonoBehaviour
 
     private void Awake()
     {
-        client.Timeout = TimeSpan.FromSeconds(5);
+        client.Timeout = TimeSpan.FromSeconds(20);
         client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("text/plain"));
     }
 
@@ -42,6 +42,7 @@ public class LoginClient : MonoBehaviour
 
     public void ConnecteToServer()
     {
+        Debug.Log("server connecting...");
         Task.Run(() => Request());
     }
     private string extractFromInput(InputField field) {
@@ -49,6 +50,7 @@ public class LoginClient : MonoBehaviour
     }
 
     private async Task Request() {
+        Debug.Log("requesting...");
         string input_name = extractFromInput(newName);
         string input_password = extractFromInput(password);
         string input_id = extractFromInput(id);
@@ -101,7 +103,7 @@ public class LoginClient : MonoBehaviour
                 
                 SceneManager.LoadScene("GameScene_1");
             }
-            catch (Exception e) {
+            catch (Exception) {
                 panel.DisplayInfo("error occurs!");
             }
         });

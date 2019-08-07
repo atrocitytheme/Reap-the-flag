@@ -16,7 +16,6 @@ public class GameStateMachine : MonoBehaviour
     public MainPlayerSpawnManager playerSpawnManager;
     public GameObject warningSign;
     public ObSpawnManager obManager;
-    bool tcpSpawnSent = false;
     int networkTimeout = -1;
     public StateType State {
         get {

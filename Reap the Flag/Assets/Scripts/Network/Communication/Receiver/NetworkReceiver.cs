@@ -75,7 +75,6 @@ public class NetworkReceiver : MonoBehaviour {
         Byte[] received = new byte[200];
         NetworkStream stream = client.GetStream();
         int total = 0;
-        int offset = 0;
         int length = int.MaxValue;
         bool lengthSet = false;
         while (true)
@@ -110,7 +109,6 @@ public class NetworkReceiver : MonoBehaviour {
                             processor.ProcessTcp(Encoding.UTF8.GetString(newArr));
                         });
                         lengthSet = false;
-                        offset = 0;
                         total = 0;
                         length = int.MaxValue;
                         received = new byte[200];

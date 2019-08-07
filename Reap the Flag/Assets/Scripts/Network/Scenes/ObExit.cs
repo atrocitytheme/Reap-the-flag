@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class ObExit : MonoBehaviour
 {
-    private bool isOpen = false;
     GameStateMachine machine;
 
     private void Start()

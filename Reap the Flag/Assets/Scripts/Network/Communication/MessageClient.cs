@@ -12,7 +12,6 @@ public class MessageClient : MonoBehaviour
 {
     public string ip;
     public int port;
-    private bool connecting = false;
     public GameStateMachine stateMachine;
     UdpClient udpClient = new UdpClient();
     TcpClient tcpClient = new TcpClient();

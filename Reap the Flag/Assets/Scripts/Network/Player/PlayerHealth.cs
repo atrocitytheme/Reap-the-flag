@@ -28,7 +28,6 @@ namespace PlayerComponent
         bool isDead;                                                // Whether the player is dead.
         bool damaged;                                               // True when the player gets damaged.
         Color defaultColor = new Color(1f, 0f, 0f, 0f);
-        float recoverSpeed = 5.0f;
         void Awake ()
         {
             // Setting up the references.
